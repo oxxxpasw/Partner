@@ -29,18 +29,14 @@ jobs:
 
     - name: Build Flutter iOS (No Sign)
       run: |
-        flutter build ios --no-codesign --release
+        # Флаг --output принудительно сохранит билд в созданную нами папку
+        flutter build ios --no-codesign --release --output=$PWD/build_output
 
     - name: Prepare APP folder for AltStore
       run: |
         mkdir -p Payload
-        APP_PATH=$(find build -name "Runner.app" -type d | head -n 1)
-        if [ -z "$APP_PATH" ]; then
-          echo "Ошибка: Файл Runner.app не найден!"
-          exit 1
-        fi
-        echo "Найден Runner.app по пути: $APP_PATH"
-        cp -r "$APP_PATH" Payload/
+        # Копируем приложение напрямую из папки вывода
+        cp -r build_output/Runner.app Payload/
         zip -r Partner.ipa Payload
 
     - name: Upload IPA Artifact
