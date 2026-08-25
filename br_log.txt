@@ -1,0 +1,73 @@
+  0s compiling builders/aot
+  1s compiling builders/aot
+  2s compiling builders/aot
+  3s compiling builders/aot
+  4s compiling builders/aot
+  5s compiling builders/aot
+  6s compiling builders/aot
+  7s compiling builders/aot
+  8s compiling builders/aot
+  9s compiling builders/aot
+  11s compiling builders/aot
+  12s compiling builders/aot
+  13s compiling builders/aot
+  14s compiling builders/aot
+  15s compiling builders/aot
+  16s compiling builders/aot
+  17s compiling builders/aot
+  18s compiling builders/aot
+  19s compiling builders/aot
+  20s compiling builders/aot
+  21s compiling builders/aot
+  22s compiling builders/aot
+  23s compiling builders/aot
+  24s compiling builders/aot
+  25s compiling builders/aot
+  26s compiling builders/aot
+  27s compiling builders/aot
+  28s compiling builders/aot
+  29s compiling builders/aot
+  31s compiling builders/aot
+  32s compiling builders/aot
+  33s compiling builders/aot
+W These options have been removed and were ignored: --delete-conflicting-outputs
+  0s freezed on 495 inputs; lib/bloc_observer.dart
+  0s freezed on 495 inputs: 1 no-op; lib/config.dart
+  24s freezed on 495 inputs: 7 no-op; spent 15s reading, 8s analyzing, 2s resolving; lib/data/mappers/assortment_mapper.dart
+  26s freezed on 495 inputs: 9 no-op; spent 16s reading, 8s analyzing, 2s resolving; lib/data/mappers/cart_mapper.dart
+  30s freezed on 495 inputs: 10 no-op; spent 19s reading, 9s analyzing, 2s resolving; lib/data/mappers/customer_account_mapper.dart
+  31s freezed on 495 inputs: 43 output, 40 no-op; spent 19s reading, 9s analyzing, 2s resolving; lib/data/repository/order_repository.dart
+  33s freezed on 495 inputs: 43 output, 43 no-op; spent 20s reading, 9s analyzing, 2s resolving; lib/data/repository/remote_config_repository.dart
+  38s freezed on 495 inputs: 47 output, 70 no-op; spent 25s reading, 10s analyzing, 2s resolving; lib/domain/bloc/auth_bloc/auth_event.dart
+  40s freezed on 495 inputs: 87 output, 119 no-op; spent 26s reading, 10s analyzing, 3s resolving; lib/domain/bloc/story_bloc/story_state.dart
+  41s freezed on 495 inputs: 121 output, 171 no-op; spent 27s reading, 11s analyzing, 3s resolving, 1s building; lib/presentation/components/payment/screens/payment_completion_waiting_screen.dart
+  43s freezed on 495 inputs: 121 output, 243 no-op; spent 28s reading, 11s analyzing, 3s resolving, 1s building; lib/presentation/screens/auth_screen/screens/loading.dart
+  44s freezed on 495 inputs: 121 output, 247 no-op; spent 29s reading, 11s analyzing, 3s resolving, 1s building; lib/presentation/screens/cart_search_screen/components/product_card.dart
+  50s freezed on 495 inputs: 121 output, 274 no-op; spent 32s reading, 14s analyzing, 3s resolving, 1s building; lib/presentation/screens/fridge_qr_scan_screen/fridge_qr_scan_screen_2.dart
+  54s freezed on 495 inputs: 125 output, 369 no-op; spent 34s reading, 15s analyzing, 3s resolving, 2s building; test/widget_test.dart
+  54s freezed on 495 inputs: 125 output, 370 no-op; spent 34s reading, 15s analyzing, 3s resolving, 2s building
+  0s json_serializable on 990 inputs; lib/bloc_observer.dart
+  1s json_serializable on 990 inputs: 25 skipped, 37 output, 69 no-op; lib/data/models/vendista_request/vendista_request_body/vendista_request_body.freezed.dart
+  2s json_serializable on 990 inputs: 343 skipped, 43 output, 551 no-op; spent 1s analyzing; test/core/bloc/auth_bloc_test.freezed.dart
+  2s json_serializable on 990 inputs: 370 skipped, 43 output, 577 no-op; spent 1s analyzing
+  0s source_gen:combining_builder on 990 inputs; lib/bloc_observer.dart
+  0s source_gen:combining_builder on 990 inputs: 370 skipped, 43 output, 577 no-op
+  0s mockito:mockBuilder on 108 inputs; test/core/bloc/auth_bloc_test.dart
+  0s mockito:mockBuilder on 108 inputs: 81 skipped, 27 no-op
+  0s injectable_generator:injectable_builder on 2088 inputs; lib/bloc_observer.dart
+  0s injectable_generator:injectable_builder on 2088 inputs: 18 skipped, 1 output, 6 no-op; lib/data/http/dio_client_module.freezed.dart
+  1s injectable_generator:injectable_builder on 2088 inputs: 364 skipped, 70 output, 187 no-op; spent 1s building; lib/domain/bloc/home_cubit/home_cubit.freezed.dart
+  2s injectable_generator:injectable_builder on 2088 inputs: 941 skipped, 107 output, 425 no-op; spent 2s building; lib/presentation/screens/cart_search_screen/components/product_card.freezed.dart
+  3s injectable_generator:injectable_builder on 2088 inputs: 1425 skipped, 108 output, 555 no-op; spent 2s building
+  0s injectable_generator:injectable_config_builder on 2088 inputs; lib/bloc_observer.dart
+  1s injectable_generator:injectable_config_builder on 2088 inputs: 908 skipped, 1 output, 520 no-op; lib/presentation/runner.freezed.dart
+  1s injectable_generator:injectable_config_builder on 2088 inputs: 1425 skipped, 1 output, 662 no-op
+  0s flutter_gen_runner on 1 input; $package$
+  0s flutter_gen_runner on 1 input: 1 output
+  0s auto_route_generator on 6264 inputs; lib/bloc_observer.config.dart
+  1s auto_route_generator on 6264 inputs: 3050 skipped, 3 output, 453 no-op; lib/presentation/components/payment/screens/payment_completion_waiting_screen.freezed.config.dart
+  1s auto_route_generator on 6264 inputs: 5600 skipped, 63 output, 601 no-op
+  0s auto_route_generator:auto_router_generator on 6264 inputs; lib/bloc_observer.config.dart
+  0s auto_route_generator:auto_router_generator on 6264 inputs: 3655 skipped, 1 output, 510 no-op; lib/presentation/router/app_router.freezed.config.dart
+  1s auto_route_generator:auto_router_generator on 6264 inputs: 5600 skipped, 1 output, 663 no-op
+  Built with build_runner/aot in 109s; wrote 385 outputs.

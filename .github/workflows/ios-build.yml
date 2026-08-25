@@ -35,18 +35,15 @@ jobs:
       run: |
         mkdir -p Payload
         
-        echo "=== Запуск глобального поиска Runner.app ==="
-        # Ищем файл абсолютно везде в домашней директории пользователя runner
-        APP_PATH=$(find /Users/runner -name "Runner.app" -type d 2>/dev/null | head -n 1)
+        # Копируем приложение по точному пути, который показала диагностика
+        APP_PATH="/Users/runner/work/Partner/Partner/build/ios/iphoneos/Release.app"
         
-        if [ -z "$APP_PATH" ]; then
-          echo "Ошибка: Файл Runner.app не найден вообще нигде на диске!"
-          echo "Показываем все созданные .app файлы для диагностики:"
-          find /Users/runner -name "*.app" -type d 2>/dev/null || true
+        if [ ! -d "$APP_PATH" ]; then
+          echo "Ошибка: Приложение не найдено по пути $APP_PATH"
           exit 1
         fi
         
-        echo "Успешно найден Runner.app по пути: $APP_PATH"
+        echo "Успешно копируем приложение из: $APP_PATH"
         cp -r "$APP_PATH" Payload/
         zip -r Partner.ipa Payload
 
