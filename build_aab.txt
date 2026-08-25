@@ -1,0 +1,16 @@
+
+Running Gradle task 'bundleAppreleaseGoogleplayRelease'...      
+Warning: The plugin mobile_scanner requires Android SDK version 36 or higher.
+For more information about build configuration, see https://flutter.dev/to/review-gradle-config.
+Your project is configured to compile against Android SDK 35, but the following plugin(s) require to be compiled against a higher Android SDK version:
+- mobile_scanner compiles against Android SDK 36
+Fix this issue by compiling against the highest Android SDK version (they are backward compatible).
+Add the following to E:\123\Partner\android\app\build.gradle:
+
+    android {
+        compileSdk = 36
+        ...
+    }
+
+Running Gradle task 'bundleAppreleaseGoogleplayRelease'...         13,2s
+√ Built build\app\outputs\bundle\appreleaseGoogleplayRelease\app-apprelease-googleplay-release.aab (43.6MB)
