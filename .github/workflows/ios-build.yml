@@ -1,0 +1,36 @@
+name: iOS Build for AltStore
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Build Archive
+      run: |
+        xcodebuild archive \
+          -project YourProject.xcodeproj \
+          -scheme YourScheme \
+          -archivePath $PWD/build/YourApp.xcarchive \
+          -sdk iphoneos \
+          CODE_SIGNING_ALLOWED=NO \
+          CODE_SIGNING_REQUIRED=NO \
+          SIGNING_ALLOWED=NO
+
+    - name: Prepare APP folder
+      run: |
+        mkdir -p Payload
+        cp -r build/YourApp.xcarchive/Products/Applications/*.app Payload/
+        zip -r YourApp.ipa Payload
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: my-ios-app
+        path: YourApp.ipa
