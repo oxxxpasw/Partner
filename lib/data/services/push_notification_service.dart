@@ -18,16 +18,20 @@ class PushNotificationService {
   static Future<DefaultResponse<String?>> initialise() async {
     try {
       _fcm = FirebaseMessaging.instance;
-      await _fcm.requestPermission(
-        alert: true,
-        announcement: false,
-        badge: true,
-        carPlay: false,
-        criticalAlert: false,
-        provisional: false,
-        sound: true,
-      );
-      fcmToken = await _fcm.getToken();
+      await _fcm
+          .requestPermission(
+            alert: true,
+            announcement: false,
+            badge: true,
+            carPlay: false,
+            criticalAlert: false,
+            provisional: false,
+            sound: true,
+          )
+          .timeout(const Duration(seconds: 15));
+      fcmToken = await _fcm
+          .getToken()
+          .timeout(const Duration(seconds: 15));
       if (kDebugMode) {
         print('fcm');
         print(fcmToken);
@@ -68,8 +72,10 @@ class PushNotificationService {
   }
 
   static Future<String?> getInitialDeepLinkFromNotification() async {
-    final message = await FirebaseMessaging.instance.getInitialMessage();
     try {
+      final message = await FirebaseMessaging.instance
+          .getInitialMessage()
+          .timeout(const Duration(seconds: 10));
       if (message != null) {
         return Notification.fromJson(message.toMap()).data.screen;
       }
