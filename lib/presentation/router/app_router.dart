@@ -104,7 +104,7 @@ class AppRouter extends RootStackRouter {
           guards: [initGuard, authGuard],
         ),
         AdaptiveRoute(
-          path: 'user-profile',
+          path: '/user-profile',
           page: UserProfileRoute.page,
           children: [
             AdaptiveRoute(
@@ -247,20 +247,8 @@ class AppRouter extends RootStackRouter {
               duration: Duration.zero,
             ),
             CustomRoute(
-              path: 'payment-processing',
-              page: PaymentCompletionRoute.page,
-              transitionsBuilder: TransitionsBuilders.noTransition,
-              duration: Duration.zero,
-            ),
-            CustomRoute(
               path: 'coffee-processing',
               page: CoffeeProcessingRoute.page,
-              transitionsBuilder: TransitionsBuilders.noTransition,
-              duration: Duration.zero,
-            ),
-            CustomRoute(
-              path: 'choose-payment-type',
-              page: ChoosePaymentTypeRoute2.page,
               transitionsBuilder: TransitionsBuilders.noTransition,
               duration: Duration.zero,
             ),

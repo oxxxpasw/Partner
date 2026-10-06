@@ -582,6 +582,12 @@ abstract class  LocaleKeys {
   static const reviewDetailsScreen_attachments = 'reviewDetailsScreen.attachments';
   static const reviewDetailsScreen_purchase_label = 'reviewDetailsScreen.purchase.label';
   static const reviewDetailsScreen_purchase = 'reviewDetailsScreen.purchase';
+  static const reviewDetailsScreen_hide_action = 'reviewDetailsScreen.hide.action';
+  static const reviewDetailsScreen_hide_confirm = 'reviewDetailsScreen.hide.confirm';
+  static const reviewDetailsScreen_hide_confirmAction = 'reviewDetailsScreen.hide.confirmAction';
+  static const reviewDetailsScreen_hide_cancel = 'reviewDetailsScreen.hide.cancel';
+  static const reviewDetailsScreen_hide_done = 'reviewDetailsScreen.hide.done';
+  static const reviewDetailsScreen_hide = 'reviewDetailsScreen.hide';
   static const reviewDetailsScreen = 'reviewDetailsScreen';
   static const imageViewer_title = 'imageViewer.title';
   static const imageViewer = 'imageViewer';

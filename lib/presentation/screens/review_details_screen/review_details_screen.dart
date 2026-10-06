@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:sosedifedi/data/repository/review_repository.dart';
 import 'package:sosedifedi/domain/bloc/review_details_cubit/review_details_cubit.dart';
 import 'package:sosedifedi/domain/models/review/review.dart';
 import 'package:sosedifedi/generated/locale_keys.g.dart';
@@ -68,6 +69,7 @@ class ReviewDetailsScreen extends StatelessWidget implements AutoRouteWrapper {
               ),
             ReviewDetailsStateStatus.ready => ReviewDetailsView(
                 review: state.review!,
+                reviewId: reviewId,
               ),
           },
         ),
@@ -88,9 +90,11 @@ class ReviewDetailsView extends StatelessWidget {
   const ReviewDetailsView({
     super.key,
     required this.review,
+    required this.reviewId,
   });
 
   final ReviewDetails review;
+  final String reviewId;
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +213,97 @@ class ReviewDetailsView extends StatelessWidget {
             }).toList(),
           ),
         ),
+      _HideReviewButton(reviewId: reviewId),
     ];
+  }
+}
+
+class _HideReviewButton extends StatefulWidget {
+  const _HideReviewButton({required this.reviewId});
+
+  final String reviewId;
+
+  @override
+  State<_HideReviewButton> createState() => _HideReviewButtonState();
+}
+
+class _HideReviewButtonState extends State<_HideReviewButton> {
+  bool _busy = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton.icon(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Theme.of(context).colorScheme.error,
+      ),
+      onPressed: _busy ? null : _hide,
+      icon: _busy
+          ? const SizedBox(
+              width: 16,
+              height: 16,
+              child: CircularProgressIndicator.adaptive(strokeWidth: 2),
+            )
+          : const Icon(Icons.visibility_off_outlined),
+      label: Text(
+        LocaleKeys.reviewDetailsScreen_hide_action.tr(context: context),
+      ),
+    );
+  }
+
+  Future<void> _hide() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(
+          LocaleKeys.reviewDetailsScreen_hide_action.tr(context: dialogContext),
+        ),
+        content: Text(
+          LocaleKeys.reviewDetailsScreen_hide_confirm
+              .tr(context: dialogContext),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(
+              LocaleKeys.reviewDetailsScreen_hide_cancel
+                  .tr(context: dialogContext),
+            ),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(
+              LocaleKeys.reviewDetailsScreen_hide_confirmAction
+                  .tr(context: dialogContext),
+            ),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+
+    setState(() => _busy = true);
+
+    final response = await GetIt.I.get<ReviewRepository>().hideReview(
+          reviewId: widget.reviewId,
+        );
+
+    if (!mounted) return;
+    setState(() => _busy = false);
+
+    if (response.hasError) {
+      Messenger.showMessage(
+        context: context,
+        message: ErrorMessages.getMessage(response.error),
+      );
+      return;
+    }
+
+    context.showToast(
+      Text(
+        LocaleKeys.reviewDetailsScreen_hide_done.tr(context: context),
+      ),
+    );
+    context.router.pop();
   }
 }
 

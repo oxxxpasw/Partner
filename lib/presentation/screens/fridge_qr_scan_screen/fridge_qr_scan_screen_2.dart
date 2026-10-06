@@ -115,7 +115,17 @@ class _FridgeQrScanScreen2State extends State<FridgeQrScanScreen2> {
                       .read<CreateOrderBloc>()
                       .add(const CreateOrderEvent.nextPagePressed());
                 },
-                onFailedPayment: () {},
+                onFailedPayment: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'Оплата не прошла. Попробуйте ещё раз.',
+                      ),
+                      backgroundColor: Color(0xFFB3261E),
+                    ),
+                  );
+                  _controller?.pop();
+                },
               ),
             ),
           CreateOrderOpenSuccessSr() => null,

@@ -31,7 +31,9 @@ class QrGenRepositoryImpl implements QrGenRepository {
   Future<DefaultResponse<void>> generateQrCodeForUnit({
     required DivisionUnit unit,
   }) async {
-    var uri = Uri.parse(environment.qrEndpoint);
+    // QR скачивается с бэкенда (/qr.png) — тот же рендер, что в CRM,
+    // локальная отрисовка больше не используется
+    var uri = Uri.parse('${environment.qrEndpoint}.png');
 
     uri = uri.replace(
       queryParameters: {
@@ -41,6 +43,6 @@ class QrGenRepositoryImpl implements QrGenRepository {
       },
     );
 
-    return qrGenService.shareQr(uri.toString(), name: unit.unitId);
+    return qrGenService.shareQrFromUrl(uri.toString(), name: unit.unitId);
   }
 }

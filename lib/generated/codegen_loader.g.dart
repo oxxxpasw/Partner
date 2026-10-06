@@ -783,6 +783,13 @@ class CodegenLoader extends AssetLoader{
     },
     "purchase": {
       "label": "Покупка от {}"
+    },
+    "hide": {
+      "action": "Скрыть отзыв",
+      "confirm": "Скрыть этот отзыв? Он будет исключён из выдачи.",
+      "confirmAction": "Скрыть",
+      "cancel": "Отмена",
+      "done": "Отзыв скрыт"
     }
   },
   "imageViewer": {

@@ -69,7 +69,9 @@ class VendistaChooseIdErrorView extends StatelessWidget {
             ),
           ),
           VendistaChooseIdScreenActionButtonWidget(
-            onPressed: () {},
+            onPressed: () => context
+                .read<CreateNewVendistaRequestBloc>()
+                .add(const CreateNewVendistaRequestEvent.init()),
           ),
         ],
       ),

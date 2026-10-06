@@ -120,6 +120,11 @@ abstract class Api1cService {
     required String id,
   });
 
+  Future<DefaultResponse<void>> hideReview({
+    required String token,
+    required String id,
+  });
+
   Future<DefaultResponse<List<ConnectionStatus>>> getConnectionStatuses({
     required String token,
     required String unitId,
@@ -615,6 +620,30 @@ class Api1cServiceImpl implements Api1cService {
       return ApiResponse.success(
         ReviewListResponse.fromJson(response.result),
       );
+    } catch (e) {
+      return ApiResponse.error(CommonResponseError.undefinedError(e));
+    }
+  }
+
+  @override
+  Future<DefaultResponse<void>> hideReview({
+    required String token,
+    required String id,
+  }) async {
+    try {
+      final response = await errorHandler.jsonRpc<Map<String, dynamic>>(
+        client: dio,
+        method: 'hideReview',
+        params: {
+          'token': token,
+          'id': id,
+        },
+        test: true,
+      );
+      if (response.hasError) {
+        return ApiResponse.error(response.error);
+      }
+      return const ApiResponse.success(null);
     } catch (e) {
       return ApiResponse.error(CommonResponseError.undefinedError(e));
     }

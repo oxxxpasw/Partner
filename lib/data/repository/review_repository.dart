@@ -14,6 +14,8 @@ abstract class ReviewRepository {
 
   Future<DefaultResponse<ReviewDetails>> getReviewById(
       {required String reviewId});
+
+  Future<DefaultResponse<void>> hideReview({required String reviewId});
 }
 
 @Singleton(as: ReviewRepository)
@@ -77,6 +79,31 @@ class ReviewRepositoryImpl implements ReviewRepository {
       return ApiResponse.success(
         reviewMapper.mapReviewDetailsFromResponse(response.result),
       );
+    } catch (e) {
+      return ApiResponse.error(CommonResponseError.undefinedError(e));
+    }
+  }
+
+  @override
+  Future<DefaultResponse<void>> hideReview({
+    required String reviewId,
+  }) async {
+    try {
+      final token = authRepository.authData?.user.token;
+
+      if (token == null) {
+        return const ApiResponse.error(CommonResponseError.unAuthorized());
+      }
+
+      final response = await apiService.hideReview(
+        token: token,
+        id: reviewId,
+      );
+
+      if (response.hasError) {
+        return ApiResponse.error(response.error);
+      }
+      return ApiResponse.success(response.result);
     } catch (e) {
       return ApiResponse.error(CommonResponseError.undefinedError(e));
     }

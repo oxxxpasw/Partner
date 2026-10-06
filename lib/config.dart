@@ -1,4 +1,4 @@
-import 'package:sosedifedi/presentation/app_environment.dart';
+﻿import 'package:sosedifedi/presentation/app_environment.dart';
 
 const kProdBackend = 'https://api.coffeelil.online';
 const kLocalBackend = 'http://10.0.2.2:8000';
@@ -15,7 +15,7 @@ const releaseAppEnvironment = AppEnvironment(
   debugPaintOptions: DebugPaintOptions(),
   geocoderApiKey: '48f97ab4-b0e4-441b-b162-d5cd6266d48f',
   sbpUrl: '$kProdBackend/sbp/',
-  paymentServiceEndpoint: '$kProdBackend/payment',
+  paymentServiceEndpoint: '$kProdBackend/payment/',
   dataownerId: 'owner-1',
   orderEndpoint: '$kProdBackend/order/',
   geocoderApiUrl: '$kProdBackend/geocode-maps/1.x/',
@@ -52,7 +52,7 @@ const testAppEnvironment = AppEnvironment(
   debugPaintOptions: DebugPaintOptions(),
   geocoderApiKey: '48f97ab4-b0e4-441b-b162-d5cd6266d48f',
   sbpUrl: '$kLocalBackend/sbp/',
-  paymentServiceEndpoint: '$kLocalBackend/payment',
+  paymentServiceEndpoint: '$kLocalBackend/payment/',
   dataownerId: 'owner-1',
   orderEndpoint: '$kLocalBackend/order/',
   geocoderApiUrl: '$kLocalBackend/geocode-maps/1.x/',
