@@ -67,6 +67,7 @@ _AppEnvironment _$AppEnvironmentFromJson(
         'knowledge_base_url',
         (v) => v as String,
       ),
+      partnerApiUrl: $defaultConvert('partner_api_url', (v) => v as String),
     );
     return val;
   },
@@ -95,6 +96,7 @@ _AppEnvironment _$AppEnvironmentFromJson(
     'qrEndpoint': 'qr_endpoint',
     'websiteUrl': 'website_url',
     'knowledgeBaseUrl': 'knowledge_base_url',
+    'partnerApiUrl': 'partner_api_url',
   },
 );
 
@@ -124,6 +126,7 @@ Map<String, dynamic> _$AppEnvironmentToJson(_AppEnvironment instance) =>
       'qr_endpoint': instance.qrEndpoint,
       'website_url': instance.websiteUrl,
       'knowledge_base_url': instance.knowledgeBaseUrl,
+      'partner_api_url': instance.partnerApiUrl,
     };
 
 const _$ConfigTypeEnumMap = {

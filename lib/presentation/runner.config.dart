@@ -50,6 +50,7 @@ import '../data/repository/customer_purchase_repository.dart' as _i546;
 import '../data/repository/division_repository.dart' as _i643;
 import '../data/repository/feedback_repository.dart' as _i954;
 import '../data/repository/fridge_repository.dart' as _i329;
+import '../data/repository/fridge_stock_repository.dart' as _i879;
 import '../data/repository/geocoder_repository.dart' as _i870;
 import '../data/repository/location_repository.dart' as _i615;
 import '../data/repository/order_repository.dart' as _i335;
@@ -67,6 +68,7 @@ import '../data/services/assortment_service.dart' as _i531;
 import '../data/services/auth_service.dart' as _i1024;
 import '../data/services/customer_api/customer_api_service.dart' as _i636;
 import '../data/services/fridge_service.dart' as _i735;
+import '../data/services/fridge_stock_service.dart' as _i748;
 import '../data/services/geocoder_service.dart' as _i450;
 import '../data/services/input_phone_service.dart' as _i209;
 import '../data/services/network_file_service.dart' as _i1041;
@@ -100,6 +102,7 @@ import '../domain/bloc/edit_product_bloc/edit_product_bloc.dart' as _i1072;
 import '../domain/bloc/feedback_cubit/feedback_cubit.dart' as _i663;
 import '../domain/bloc/fridge_qr_scanner_bloc/fridge_qr_scanner_bloc.dart'
     as _i952;
+import '../domain/bloc/fridge_stock_cubit/fridge_stock_cubit.dart' as _i168;
 import '../domain/bloc/home_cubit/home_cubit.dart' as _i331;
 import '../domain/bloc/home_promotion_bloc/home_promotion_bloc.dart' as _i143;
 import '../domain/bloc/last_purchase_bloc/last_purchase_bloc.dart' as _i1004;
@@ -226,7 +229,6 @@ Future<_i174.GetIt> $initGetIt(
     () => dioClientModule.dioClientCreator(gh<_i710.AppEnvironment>()),
     registerFor: {_releaseEnv, _debugEnv},
   );
-  gh.singleton<_i361.QrGenService>(() => _i361.QrGenServiceImpl());
   gh.singleton<_i615.LocationRepository>(() => _i615.LocationRepositoryImpl());
   gh.factoryParam<
     _i719.CupertinoThemeData,
@@ -270,6 +272,9 @@ Future<_i174.GetIt> $initGetIt(
     () => dioClientModule.makeDioSbpClientHandler(),
     instanceName: 'sbpClient',
   );
+  gh.singleton<_i361.QrGenService>(
+    () => _i361.QrGenServiceImpl(dio: gh<_i362.Dio>()),
+  );
   gh.factory<_i545.WebViewPaymentBloc>(
     () => _i545.WebViewPaymentBloc(appEnvironment: gh<_i710.AppEnvironment>()),
   );
@@ -281,6 +286,10 @@ Future<_i174.GetIt> $initGetIt(
     () => dioClientModule.makeDioStaticFilesErrorHandler(),
     instanceName: 'staticFilesClient',
     registerFor: {_testEnv, _releaseEnv, _debugEnv},
+  );
+  gh.singleton<_i362.Dio>(
+    () => dioClientModule.makeDioPartnerApiClient(gh<_i14.DioClientCreator>()),
+    instanceName: 'partnerApiClient',
   );
   gh.singleton<_i362.Dio>(
     () => dioClientModule.makeDioPaymentClient(gh<_i14.DioClientCreator>()),
@@ -388,6 +397,14 @@ Future<_i174.GetIt> $initGetIt(
     () => dioClientModule.makeDioJsonRpcErrorTestHandler(),
     instanceName: 'authServiceClient',
     registerFor: {_testEnv},
+  );
+  gh.singleton<_i748.FridgeStockService>(
+    () => _i748.FridgeStockServiceImpl(
+      dio: gh<_i362.Dio>(instanceName: 'partnerApiClient'),
+      handler: gh<_i678.DioErrorHandler<_i678.DefaultApiError>>(
+        instanceName: 'partnerApiClient',
+      ),
+    ),
   );
   await gh.singletonAsync<_i730.AnalystService>(
     () => _i730.AnalystServiceImpl.create(
@@ -611,6 +628,12 @@ Future<_i174.GetIt> $initGetIt(
       sbpMapper: gh<_i1007.SbpMapper>(),
     ),
   );
+  gh.singleton<_i879.FridgeStockRepository>(
+    () => _i879.FridgeStockRepositoryImpl(
+      fridgeStockService: gh<_i748.FridgeStockService>(),
+      authRepository: gh<_i79.AuthRepository>(),
+    ),
+  );
   gh.singleton<_i954.FeedbackRepository>(
     () => _i954.FeedbackRepository(
       gh<_i710.AppEnvironment>(),
@@ -670,6 +693,12 @@ Future<_i174.GetIt> $initGetIt(
       bonusCardRepository: gh<_i87.CustomerAccountRepository>(),
       orderModelMapper: gh<_i478.OrderModelMapper>(),
       cartMapper: gh<_i763.CartMapper>(),
+    ),
+  );
+  gh.factoryParam<_i168.FridgeStockCubit, String, dynamic>(
+    (deviceId, _) => _i168.FridgeStockCubit(
+      repository: gh<_i879.FridgeStockRepository>(),
+      deviceId: deviceId,
     ),
   );
   gh.singleton<_i239.AuthGuard>(

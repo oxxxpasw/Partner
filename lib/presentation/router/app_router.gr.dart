@@ -9,27 +9,27 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i64;
-import 'package:collection/collection.dart' as _i73;
-import 'package:flutter/cupertino.dart' as _i68;
-import 'package:flutter/foundation.dart' as _i69;
-import 'package:flutter/material.dart' as _i65;
-import 'package:flutter_inappwebview/flutter_inappwebview.dart' as _i71;
-import 'package:sosedifedi/data/models/stores/stores.dart' as _i66;
+import 'package:auto_route/auto_route.dart' as _i65;
+import 'package:collection/collection.dart' as _i74;
+import 'package:flutter/cupertino.dart' as _i69;
+import 'package:flutter/foundation.dart' as _i70;
+import 'package:flutter/material.dart' as _i66;
+import 'package:flutter_inappwebview/flutter_inappwebview.dart' as _i72;
+import 'package:sosedifedi/data/models/stores/stores.dart' as _i67;
 import 'package:sosedifedi/domain/models/order/order_model/order_model.dart'
-    as _i70;
-import 'package:sosedifedi/domain/models/payment/payment.dart' as _i72;
-import 'package:sosedifedi/domain/models/product/product.dart' as _i67;
+    as _i71;
+import 'package:sosedifedi/domain/models/payment/payment.dart' as _i73;
+import 'package:sosedifedi/domain/models/product/product.dart' as _i68;
 import 'package:sosedifedi/domain/models/vendista_request/vendista_request.dart'
-    as _i74;
+    as _i75;
 import 'package:sosedifedi/presentation/components/knowledge_base_webview_screen/knowledge_base_webview_screen.dart'
-    as _i26;
+    as _i27;
 import 'package:sosedifedi/presentation/components/payment/screens/choose_sbp.dart'
     as _i11;
 import 'package:sosedifedi/presentation/components/payment/screens/payment_completion_waiting_screen.dart'
-    as _i33;
+    as _i34;
 import 'package:sosedifedi/presentation/components/payment/screens/web_view_payment_screen.dart'
-    as _i63;
+    as _i64;
 import 'package:sosedifedi/presentation/popups/bank_app_not_installed_popup/bank_app_not_installed_popup.dart'
     as _i3;
 import 'package:sosedifedi/presentation/popups/change_city_popup/change_city_popup.dart'
@@ -37,21 +37,21 @@ import 'package:sosedifedi/presentation/popups/change_city_popup/change_city_pop
 import 'package:sosedifedi/presentation/popups/fridge_not_selected_popup/fridge_not_selected_popup.dart'
     as _i20;
 import 'package:sosedifedi/presentation/popups/has_unfinished_purchase_popup/has_unfinished_purchase_popup.dart'
-    as _i23;
-import 'package:sosedifedi/presentation/popups/has_unpaid_order_popup/has_unpaid_order_popup.dart'
     as _i24;
+import 'package:sosedifedi/presentation/popups/has_unpaid_order_popup/has_unpaid_order_popup.dart'
+    as _i25;
 import 'package:sosedifedi/presentation/popups/open_without_reg_popup/open_without_reg_popup.dart'
-    as _i29;
+    as _i30;
 import 'package:sosedifedi/presentation/popups/report_problem_popup/qr_report_problem_popup.dart'
-    as _i37;
+    as _i38;
 import 'package:sosedifedi/presentation/popups/report_problem_popup/report_problem_popup.dart'
-    as _i39;
-import 'package:sosedifedi/presentation/popups/report_problem_popup/report_problem_screen.dart'
     as _i40;
+import 'package:sosedifedi/presentation/popups/report_problem_popup/report_problem_screen.dart'
+    as _i41;
 import 'package:sosedifedi/presentation/popups/send_feedback_popup/send_feedback_popup.dart'
-    as _i47;
+    as _i48;
 import 'package:sosedifedi/presentation/popups/user_banned_popup/user_banned_popup.dart'
-    as _i56;
+    as _i57;
 import 'package:sosedifedi/presentation/screens/auth_screen/auth_screen.dart'
     as _i2;
 import 'package:sosedifedi/presentation/screens/auth_screen/screens/code_input_screen.dart'
@@ -59,9 +59,9 @@ import 'package:sosedifedi/presentation/screens/auth_screen/screens/code_input_s
 import 'package:sosedifedi/presentation/screens/auth_screen/screens/loading.dart'
     as _i1;
 import 'package:sosedifedi/presentation/screens/auth_screen/screens/phone_input_screen.dart'
-    as _i34;
+    as _i35;
 import 'package:sosedifedi/presentation/screens/auth_screen/screens/start_screen.dart'
-    as _i52;
+    as _i53;
 import 'package:sosedifedi/presentation/screens/cart_search_screen/cart_search_screen.dart'
     as _i5;
 import 'package:sosedifedi/presentation/screens/choose_payment_type_screen/choose_payment_type_screen3.dart'
@@ -71,9 +71,9 @@ import 'package:sosedifedi/presentation/screens/city_list_screen/city_list_scree
 import 'package:sosedifedi/presentation/screens/confirm_order_screen/confirm_order_screen.dart'
     as _i15;
 import 'package:sosedifedi/presentation/screens/confirm_order_screen/screens/order_form_screen.dart'
-    as _i30;
-import 'package:sosedifedi/presentation/screens/confirm_order_screen/screens/order_loading_screen.dart'
     as _i31;
+import 'package:sosedifedi/presentation/screens/confirm_order_screen/screens/order_loading_screen.dart'
+    as _i32;
 import 'package:sosedifedi/presentation/screens/create_order_screen/create_order_screen.dart'
     as _i16;
 import 'package:sosedifedi/presentation/screens/create_order_screen/screens/check_address_screen.dart'
@@ -83,13 +83,13 @@ import 'package:sosedifedi/presentation/screens/create_order_screen/screens/choo
 import 'package:sosedifedi/presentation/screens/create_order_screen/screens/coffee_processing_screen.dart'
     as _i14;
 import 'package:sosedifedi/presentation/screens/create_order_screen/screens/payment_completion_screen.dart'
-    as _i32;
+    as _i33;
 import 'package:sosedifedi/presentation/screens/create_vendista_request_screen/create_vendista_requests_screen.dart'
     as _i17;
 import 'package:sosedifedi/presentation/screens/create_vendista_request_screen/screens/vendista_auth_screen.dart'
-    as _i59;
-import 'package:sosedifedi/presentation/screens/create_vendista_request_screen/screens/vendista_choose_id_screen.dart'
     as _i60;
+import 'package:sosedifedi/presentation/screens/create_vendista_request_screen/screens/vendista_choose_id_screen.dart'
+    as _i61;
 import 'package:sosedifedi/presentation/screens/division_details/division_details.dart'
     as _i18;
 import 'package:sosedifedi/presentation/screens/fridge_qr_scan_screen/components/barcode_not_found_popup.dart'
@@ -103,61 +103,63 @@ import 'package:sosedifedi/presentation/screens/fridge_qr_scan_screen/screens/ca
 import 'package:sosedifedi/presentation/screens/fridge_qr_scan_screen/screens/fridge_choose_payment.dart'
     as _i9;
 import 'package:sosedifedi/presentation/screens/fridge_qr_scan_screen/screens/scan_cart_screen.dart'
-    as _i44;
-import 'package:sosedifedi/presentation/screens/fridge_qr_scan_screen/screens/scan_screen.dart'
-    as _i46;
-import 'package:sosedifedi/presentation/screens/fridge_qr_scan_screen/screens/scan_store_screen.dart'
     as _i45;
+import 'package:sosedifedi/presentation/screens/fridge_qr_scan_screen/screens/scan_screen.dart'
+    as _i47;
+import 'package:sosedifedi/presentation/screens/fridge_qr_scan_screen/screens/scan_store_screen.dart'
+    as _i46;
+import 'package:sosedifedi/presentation/screens/fridge_stock_screen/fridge_stock_screen.dart'
+    as _i23;
 import 'package:sosedifedi/presentation/screens/home_screen/home_screen.dart'
-    as _i25;
+    as _i26;
 import 'package:sosedifedi/presentation/screens/new_order_info_screen/new_order_info_screen.dart'
-    as _i28;
+    as _i29;
 import 'package:sosedifedi/presentation/screens/point_list_screen/point_list_modal_screen.dart'
-    as _i35;
-import 'package:sosedifedi/presentation/screens/qr_scan_screen/qr_scan_screen.dart'
-    as _i38;
-import 'package:sosedifedi/presentation/screens/report_screen/report_screen.dart'
-    as _i41;
-import 'package:sosedifedi/presentation/screens/review_details_screen/review_details_screen.dart'
-    as _i42;
-import 'package:sosedifedi/presentation/screens/reviews_screen/reviews_screen.dart'
-    as _i43;
-import 'package:sosedifedi/presentation/screens/splash_screen/screens/splash_error_screen.dart'
-    as _i48;
-import 'package:sosedifedi/presentation/screens/splash_screen/screens/splash_loading_screen.dart'
-    as _i49;
-import 'package:sosedifedi/presentation/screens/splash_screen/screens/splash_update_screen.dart'
-    as _i51;
-import 'package:sosedifedi/presentation/screens/splash_screen/splash_screen.dart'
-    as _i50;
-import 'package:sosedifedi/presentation/screens/support_chat_screen/support_chat_screen.dart'
-    as _i53;
-import 'package:sosedifedi/presentation/screens/unit_events_screen/unit_events_screen.dart'
-    as _i54;
-import 'package:sosedifedi/presentation/screens/unit_temp_screen/unit_temp_screen.dart'
-    as _i55;
-import 'package:sosedifedi/presentation/screens/user_data_screen/user_data_screen.dart'
-    as _i57;
-import 'package:sosedifedi/presentation/screens/user_profile_screen/screens/legal_info_screen.dart'
-    as _i27;
-import 'package:sosedifedi/presentation/screens/user_profile_screen/screens/profile_screen.dart'
     as _i36;
-import 'package:sosedifedi/presentation/screens/user_profile_screen/user_profile_screen.dart'
+import 'package:sosedifedi/presentation/screens/qr_scan_screen/qr_scan_screen.dart'
+    as _i39;
+import 'package:sosedifedi/presentation/screens/report_screen/report_screen.dart'
+    as _i42;
+import 'package:sosedifedi/presentation/screens/review_details_screen/review_details_screen.dart'
+    as _i43;
+import 'package:sosedifedi/presentation/screens/reviews_screen/reviews_screen.dart'
+    as _i44;
+import 'package:sosedifedi/presentation/screens/splash_screen/screens/splash_error_screen.dart'
+    as _i49;
+import 'package:sosedifedi/presentation/screens/splash_screen/screens/splash_loading_screen.dart'
+    as _i50;
+import 'package:sosedifedi/presentation/screens/splash_screen/screens/splash_update_screen.dart'
+    as _i52;
+import 'package:sosedifedi/presentation/screens/splash_screen/splash_screen.dart'
+    as _i51;
+import 'package:sosedifedi/presentation/screens/support_chat_screen/support_chat_screen.dart'
+    as _i54;
+import 'package:sosedifedi/presentation/screens/unit_events_screen/unit_events_screen.dart'
+    as _i55;
+import 'package:sosedifedi/presentation/screens/unit_temp_screen/unit_temp_screen.dart'
+    as _i56;
+import 'package:sosedifedi/presentation/screens/user_data_screen/user_data_screen.dart'
     as _i58;
+import 'package:sosedifedi/presentation/screens/user_profile_screen/screens/legal_info_screen.dart'
+    as _i28;
+import 'package:sosedifedi/presentation/screens/user_profile_screen/screens/profile_screen.dart'
+    as _i37;
+import 'package:sosedifedi/presentation/screens/user_profile_screen/user_profile_screen.dart'
+    as _i59;
 import 'package:sosedifedi/presentation/screens/vendista_request_details_screen/vendista_request_details_screen.dart'
-    as _i61;
-import 'package:sosedifedi/presentation/screens/vendista_requests_screen/vendista_requests_screen.dart'
     as _i62;
+import 'package:sosedifedi/presentation/screens/vendista_requests_screen/vendista_requests_screen.dart'
+    as _i63;
 
 /// generated route for
 /// [_i1.AuthLoadingScreen]
-class AuthLoadingRoute extends _i64.PageRouteInfo<void> {
-  const AuthLoadingRoute({List<_i64.PageRouteInfo>? children})
+class AuthLoadingRoute extends _i65.PageRouteInfo<void> {
+  const AuthLoadingRoute({List<_i65.PageRouteInfo>? children})
     : super(AuthLoadingRoute.name, initialChildren: children);
 
   static const String name = 'AuthLoadingRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       return const _i1.AuthLoadingScreen();
@@ -167,12 +169,12 @@ class AuthLoadingRoute extends _i64.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.AuthScreen]
-class AuthRoute extends _i64.PageRouteInfo<AuthRouteArgs> {
+class AuthRoute extends _i65.PageRouteInfo<AuthRouteArgs> {
   AuthRoute({
-    _i65.Key? key,
-    _i65.VoidCallback? onComplete,
+    _i66.Key? key,
+    _i66.VoidCallback? onComplete,
     bool canSkipAuth = true,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          AuthRoute.name,
          args: AuthRouteArgs(
@@ -185,13 +187,13 @@ class AuthRoute extends _i64.PageRouteInfo<AuthRouteArgs> {
 
   static const String name = 'AuthRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<AuthRouteArgs>(
         orElse: () => const AuthRouteArgs(),
       );
-      return _i64.WrappedRoute(
+      return _i65.WrappedRoute(
         child: _i2.AuthScreen(
           key: args.key,
           onComplete: args.onComplete,
@@ -205,9 +207,9 @@ class AuthRoute extends _i64.PageRouteInfo<AuthRouteArgs> {
 class AuthRouteArgs {
   const AuthRouteArgs({this.key, this.onComplete, this.canSkipAuth = true});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i65.VoidCallback? onComplete;
+  final _i66.VoidCallback? onComplete;
 
   final bool canSkipAuth;
 
@@ -231,13 +233,13 @@ class AuthRouteArgs {
 
 /// generated route for
 /// [_i3.BankAppNotInstalledPopup]
-class BankAppNotInstalledPopup extends _i64.PageRouteInfo<void> {
-  const BankAppNotInstalledPopup({List<_i64.PageRouteInfo>? children})
+class BankAppNotInstalledPopup extends _i65.PageRouteInfo<void> {
+  const BankAppNotInstalledPopup({List<_i65.PageRouteInfo>? children})
     : super(BankAppNotInstalledPopup.name, initialChildren: children);
 
   static const String name = 'BankAppNotInstalledPopup';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       return const _i3.BankAppNotInstalledPopup();
@@ -247,13 +249,13 @@ class BankAppNotInstalledPopup extends _i64.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.BarcodeNotFoundPopup]
-class BarcodeNotFoundPopup extends _i64.PageRouteInfo<void> {
-  const BarcodeNotFoundPopup({List<_i64.PageRouteInfo>? children})
+class BarcodeNotFoundPopup extends _i65.PageRouteInfo<void> {
+  const BarcodeNotFoundPopup({List<_i65.PageRouteInfo>? children})
     : super(BarcodeNotFoundPopup.name, initialChildren: children);
 
   static const String name = 'BarcodeNotFoundPopup';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       return const _i4.BarcodeNotFoundPopup();
@@ -263,11 +265,11 @@ class BarcodeNotFoundPopup extends _i64.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.CartSearchScreen]
-class CartSearchRoute extends _i64.PageRouteInfo<CartSearchRouteArgs> {
+class CartSearchRoute extends _i65.PageRouteInfo<CartSearchRouteArgs> {
   CartSearchRoute({
-    _i65.Key? key,
-    required _i66.Store store,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    required _i67.Store store,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          CartSearchRoute.name,
          args: CartSearchRouteArgs(key: key, store: store),
@@ -276,11 +278,11 @@ class CartSearchRoute extends _i64.PageRouteInfo<CartSearchRouteArgs> {
 
   static const String name = 'CartSearchRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<CartSearchRouteArgs>();
-      return _i64.WrappedRoute(
+      return _i65.WrappedRoute(
         child: _i5.CartSearchScreen(key: args.key, store: args.store),
       );
     },
@@ -290,9 +292,9 @@ class CartSearchRoute extends _i64.PageRouteInfo<CartSearchRouteArgs> {
 class CartSearchRouteArgs {
   const CartSearchRouteArgs({this.key, required this.store});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i66.Store store;
+  final _i67.Store store;
 
   @override
   String toString() {
@@ -312,11 +314,11 @@ class CartSearchRouteArgs {
 
 /// generated route for
 /// [_i6.ChangeCityPopup]
-class ChangeCityPopup extends _i64.PageRouteInfo<ChangeCityPopupArgs> {
+class ChangeCityPopup extends _i65.PageRouteInfo<ChangeCityPopupArgs> {
   ChangeCityPopup({
-    _i65.Key? key,
-    required _i66.City newCity,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    required _i67.City newCity,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          ChangeCityPopup.name,
          args: ChangeCityPopupArgs(key: key, newCity: newCity),
@@ -325,7 +327,7 @@ class ChangeCityPopup extends _i64.PageRouteInfo<ChangeCityPopupArgs> {
 
   static const String name = 'ChangeCityPopup';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ChangeCityPopupArgs>();
@@ -337,9 +339,9 @@ class ChangeCityPopup extends _i64.PageRouteInfo<ChangeCityPopupArgs> {
 class ChangeCityPopupArgs {
   const ChangeCityPopupArgs({this.key, required this.newCity});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i66.City newCity;
+  final _i67.City newCity;
 
   @override
   String toString() {
@@ -359,12 +361,12 @@ class ChangeCityPopupArgs {
 
 /// generated route for
 /// [_i7.CheckAddressScreen]
-class CheckAddressRoute extends _i64.PageRouteInfo<CheckAddressRouteArgs> {
+class CheckAddressRoute extends _i65.PageRouteInfo<CheckAddressRouteArgs> {
   CheckAddressRoute({
-    _i65.Key? key,
-    required _i66.Store store,
-    _i65.VoidCallback? onNextPressed,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    required _i67.Store store,
+    _i66.VoidCallback? onNextPressed,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          CheckAddressRoute.name,
          args: CheckAddressRouteArgs(
@@ -377,7 +379,7 @@ class CheckAddressRoute extends _i64.PageRouteInfo<CheckAddressRouteArgs> {
 
   static const String name = 'CheckAddressRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<CheckAddressRouteArgs>();
@@ -397,11 +399,11 @@ class CheckAddressRouteArgs {
     this.onNextPressed,
   });
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i66.Store store;
+  final _i67.Store store;
 
-  final _i65.VoidCallback? onNextPressed;
+  final _i66.VoidCallback? onNextPressed;
 
   @override
   String toString() {
@@ -423,12 +425,12 @@ class CheckAddressRouteArgs {
 
 /// generated route for
 /// [_i8.ChooseDrinkScreen]
-class ChooseDrinkRoute extends _i64.PageRouteInfo<ChooseDrinkRouteArgs> {
+class ChooseDrinkRoute extends _i65.PageRouteInfo<ChooseDrinkRouteArgs> {
   ChooseDrinkRoute({
-    _i65.Key? key,
+    _i66.Key? key,
     required String storeFile,
-    void Function(_i67.Product)? onProductSelected,
-    List<_i64.PageRouteInfo>? children,
+    void Function(_i68.Product)? onProductSelected,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          ChooseDrinkRoute.name,
          args: ChooseDrinkRouteArgs(
@@ -441,11 +443,11 @@ class ChooseDrinkRoute extends _i64.PageRouteInfo<ChooseDrinkRouteArgs> {
 
   static const String name = 'ChooseDrinkRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ChooseDrinkRouteArgs>();
-      return _i64.WrappedRoute(
+      return _i65.WrappedRoute(
         child: _i8.ChooseDrinkScreen(
           key: args.key,
           storeFile: args.storeFile,
@@ -463,11 +465,11 @@ class ChooseDrinkRouteArgs {
     this.onProductSelected,
   });
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
   final String storeFile;
 
-  final void Function(_i67.Product)? onProductSelected;
+  final void Function(_i68.Product)? onProductSelected;
 
   @override
   String toString() {
@@ -487,13 +489,13 @@ class ChooseDrinkRouteArgs {
 
 /// generated route for
 /// [_i9.ChoosePaymentTypeScreen2]
-class ChoosePaymentTypeRoute2 extends _i64.PageRouteInfo<void> {
-  const ChoosePaymentTypeRoute2({List<_i64.PageRouteInfo>? children})
+class ChoosePaymentTypeRoute2 extends _i65.PageRouteInfo<void> {
+  const ChoosePaymentTypeRoute2({List<_i65.PageRouteInfo>? children})
     : super(ChoosePaymentTypeRoute2.name, initialChildren: children);
 
   static const String name = 'ChoosePaymentTypeRoute2';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       return const _i9.ChoosePaymentTypeScreen2();
@@ -504,11 +506,11 @@ class ChoosePaymentTypeRoute2 extends _i64.PageRouteInfo<void> {
 /// generated route for
 /// [_i10.ChoosePaymentTypeScreen3]
 class ChoosePaymentTypeRoute3
-    extends _i64.PageRouteInfo<ChoosePaymentTypeRoute3Args> {
+    extends _i65.PageRouteInfo<ChoosePaymentTypeRoute3Args> {
   ChoosePaymentTypeRoute3({
-    _i68.Key? key,
+    _i69.Key? key,
     required String storeId,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          ChoosePaymentTypeRoute3.name,
          args: ChoosePaymentTypeRoute3Args(key: key, storeId: storeId),
@@ -517,11 +519,11 @@ class ChoosePaymentTypeRoute3
 
   static const String name = 'ChoosePaymentTypeRoute3';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ChoosePaymentTypeRoute3Args>();
-      return _i64.WrappedRoute(
+      return _i65.WrappedRoute(
         child: _i10.ChoosePaymentTypeScreen3(
           key: args.key,
           storeId: args.storeId,
@@ -534,7 +536,7 @@ class ChoosePaymentTypeRoute3
 class ChoosePaymentTypeRoute3Args {
   const ChoosePaymentTypeRoute3Args({this.key, required this.storeId});
 
-  final _i68.Key? key;
+  final _i69.Key? key;
 
   final String storeId;
 
@@ -557,16 +559,16 @@ class ChoosePaymentTypeRoute3Args {
 /// generated route for
 /// [_i11.ChooseSpbPaymentScreen]
 class ChooseSpbPaymentRoute
-    extends _i64.PageRouteInfo<ChooseSpbPaymentRouteArgs> {
+    extends _i65.PageRouteInfo<ChooseSpbPaymentRouteArgs> {
   ChooseSpbPaymentRoute({
-    _i69.Key? key,
+    _i70.Key? key,
     required Uri qrUrl,
     required String paymentId,
     required String storeId,
-    required _i69.VoidCallback? onFailedPayment,
-    _i69.VoidCallback? onBankOpened,
-    _i69.VoidCallback? onPayment,
-    List<_i64.PageRouteInfo>? children,
+    required _i70.VoidCallback? onFailedPayment,
+    _i70.VoidCallback? onBankOpened,
+    _i70.VoidCallback? onPayment,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          ChooseSpbPaymentRoute.name,
          args: ChooseSpbPaymentRouteArgs(
@@ -583,11 +585,11 @@ class ChooseSpbPaymentRoute
 
   static const String name = 'ChooseSpbPaymentRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ChooseSpbPaymentRouteArgs>();
-      return _i64.WrappedRoute(
+      return _i65.WrappedRoute(
         child: _i11.ChooseSpbPaymentScreen(
           key: args.key,
           qrUrl: args.qrUrl,
@@ -613,7 +615,7 @@ class ChooseSpbPaymentRouteArgs {
     this.onPayment,
   });
 
-  final _i69.Key? key;
+  final _i70.Key? key;
 
   final Uri qrUrl;
 
@@ -621,11 +623,11 @@ class ChooseSpbPaymentRouteArgs {
 
   final String storeId;
 
-  final _i69.VoidCallback? onFailedPayment;
+  final _i70.VoidCallback? onFailedPayment;
 
-  final _i69.VoidCallback? onBankOpened;
+  final _i70.VoidCallback? onBankOpened;
 
-  final _i69.VoidCallback? onPayment;
+  final _i70.VoidCallback? onPayment;
 
   @override
   String toString() {
@@ -658,11 +660,11 @@ class ChooseSpbPaymentRouteArgs {
 
 /// generated route for
 /// [_i12.CityListScreen]
-class CityListRoute extends _i64.PageRouteInfo<CityListRouteArgs> {
+class CityListRoute extends _i65.PageRouteInfo<CityListRouteArgs> {
   CityListRoute({
-    _i65.Key? key,
-    _i65.VoidCallback? onSelectSelected,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    _i66.VoidCallback? onSelectSelected,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          CityListRoute.name,
          args: CityListRouteArgs(key: key, onSelectSelected: onSelectSelected),
@@ -671,13 +673,13 @@ class CityListRoute extends _i64.PageRouteInfo<CityListRouteArgs> {
 
   static const String name = 'CityListRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<CityListRouteArgs>(
         orElse: () => const CityListRouteArgs(),
       );
-      return _i64.WrappedRoute(
+      return _i65.WrappedRoute(
         child: _i12.CityListScreen(
           key: args.key,
           onSelectSelected: args.onSelectSelected,
@@ -690,9 +692,9 @@ class CityListRoute extends _i64.PageRouteInfo<CityListRouteArgs> {
 class CityListRouteArgs {
   const CityListRouteArgs({this.key, this.onSelectSelected});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i65.VoidCallback? onSelectSelected;
+  final _i66.VoidCallback? onSelectSelected;
 
   @override
   String toString() {
@@ -712,13 +714,13 @@ class CityListRouteArgs {
 
 /// generated route for
 /// [_i13.CodeInputScreen]
-class CodeInputRoute extends _i64.PageRouteInfo<void> {
-  const CodeInputRoute({List<_i64.PageRouteInfo>? children})
+class CodeInputRoute extends _i65.PageRouteInfo<void> {
+  const CodeInputRoute({List<_i65.PageRouteInfo>? children})
     : super(CodeInputRoute.name, initialChildren: children);
 
   static const String name = 'CodeInputRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       return const _i13.CodeInputScreen();
@@ -729,11 +731,11 @@ class CodeInputRoute extends _i64.PageRouteInfo<void> {
 /// generated route for
 /// [_i14.CoffeeProcessingScreen]
 class CoffeeProcessingRoute
-    extends _i64.PageRouteInfo<CoffeeProcessingRouteArgs> {
+    extends _i65.PageRouteInfo<CoffeeProcessingRouteArgs> {
   CoffeeProcessingRoute({
-    _i65.Key? key,
-    _i65.VoidCallback? onSuccess,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    _i66.VoidCallback? onSuccess,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          CoffeeProcessingRoute.name,
          args: CoffeeProcessingRouteArgs(key: key, onSuccess: onSuccess),
@@ -742,7 +744,7 @@ class CoffeeProcessingRoute
 
   static const String name = 'CoffeeProcessingRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<CoffeeProcessingRouteArgs>(
@@ -759,9 +761,9 @@ class CoffeeProcessingRoute
 class CoffeeProcessingRouteArgs {
   const CoffeeProcessingRouteArgs({this.key, this.onSuccess});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i65.VoidCallback? onSuccess;
+  final _i66.VoidCallback? onSuccess;
 
   @override
   String toString() {
@@ -781,11 +783,11 @@ class CoffeeProcessingRouteArgs {
 
 /// generated route for
 /// [_i15.ConfirmOrderScreen]
-class ConfirmOrderRoute extends _i64.PageRouteInfo<ConfirmOrderRouteArgs> {
+class ConfirmOrderRoute extends _i65.PageRouteInfo<ConfirmOrderRouteArgs> {
   ConfirmOrderRoute({
-    _i65.Key? key,
-    _i66.Store? store,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    _i67.Store? store,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          ConfirmOrderRoute.name,
          args: ConfirmOrderRouteArgs(key: key, store: store),
@@ -794,13 +796,13 @@ class ConfirmOrderRoute extends _i64.PageRouteInfo<ConfirmOrderRouteArgs> {
 
   static const String name = 'ConfirmOrderRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ConfirmOrderRouteArgs>(
         orElse: () => const ConfirmOrderRouteArgs(),
       );
-      return _i64.WrappedRoute(
+      return _i65.WrappedRoute(
         child: _i15.ConfirmOrderScreen(key: args.key, store: args.store),
       );
     },
@@ -810,9 +812,9 @@ class ConfirmOrderRoute extends _i64.PageRouteInfo<ConfirmOrderRouteArgs> {
 class ConfirmOrderRouteArgs {
   const ConfirmOrderRouteArgs({this.key, this.store});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i66.Store? store;
+  final _i67.Store? store;
 
   @override
   String toString() {
@@ -832,12 +834,12 @@ class ConfirmOrderRouteArgs {
 
 /// generated route for
 /// [_i16.CreateOrderScreen]
-class CreateOrderRoute extends _i64.PageRouteInfo<CreateOrderRouteArgs> {
+class CreateOrderRoute extends _i65.PageRouteInfo<CreateOrderRouteArgs> {
   CreateOrderRoute({
-    _i65.Key? key,
-    required _i66.Store store,
-    required _i66.CoffeeMachine coffeeMachine,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    required _i67.Store store,
+    required _i67.CoffeeMachine coffeeMachine,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          CreateOrderRoute.name,
          args: CreateOrderRouteArgs(
@@ -850,11 +852,11 @@ class CreateOrderRoute extends _i64.PageRouteInfo<CreateOrderRouteArgs> {
 
   static const String name = 'CreateOrderRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<CreateOrderRouteArgs>();
-      return _i64.WrappedRoute(
+      return _i65.WrappedRoute(
         child: _i16.CreateOrderScreen(
           key: args.key,
           store: args.store,
@@ -872,11 +874,11 @@ class CreateOrderRouteArgs {
     required this.coffeeMachine,
   });
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i66.Store store;
+  final _i67.Store store;
 
-  final _i66.CoffeeMachine coffeeMachine;
+  final _i67.CoffeeMachine coffeeMachine;
 
   @override
   String toString() {
@@ -898,16 +900,16 @@ class CreateOrderRouteArgs {
 
 /// generated route for
 /// [_i17.CreateVendistaRequestScreen]
-class CreateVendistaRequestRoute extends _i64.PageRouteInfo<void> {
-  const CreateVendistaRequestRoute({List<_i64.PageRouteInfo>? children})
+class CreateVendistaRequestRoute extends _i65.PageRouteInfo<void> {
+  const CreateVendistaRequestRoute({List<_i65.PageRouteInfo>? children})
     : super(CreateVendistaRequestRoute.name, initialChildren: children);
 
   static const String name = 'CreateVendistaRequestRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return _i64.WrappedRoute(child: const _i17.CreateVendistaRequestScreen());
+      return _i65.WrappedRoute(child: const _i17.CreateVendistaRequestScreen());
     },
   );
 }
@@ -915,11 +917,11 @@ class CreateVendistaRequestRoute extends _i64.PageRouteInfo<void> {
 /// generated route for
 /// [_i18.DivisionDetailsScreen]
 class DivisionDetailsRoute
-    extends _i64.PageRouteInfo<DivisionDetailsRouteArgs> {
+    extends _i65.PageRouteInfo<DivisionDetailsRouteArgs> {
   DivisionDetailsRoute({
-    _i65.Key? key,
+    _i66.Key? key,
     required String divisionId,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          DivisionDetailsRoute.name,
          args: DivisionDetailsRouteArgs(key: key, divisionId: divisionId),
@@ -929,7 +931,7 @@ class DivisionDetailsRoute
 
   static const String name = 'DivisionDetailsRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
@@ -938,7 +940,7 @@ class DivisionDetailsRoute
           divisionId: pathParams.getString('divisionId'),
         ),
       );
-      return _i64.WrappedRoute(
+      return _i65.WrappedRoute(
         child: _i18.DivisionDetailsScreen(
           key: args.key,
           divisionId: args.divisionId,
@@ -951,7 +953,7 @@ class DivisionDetailsRoute
 class DivisionDetailsRouteArgs {
   const DivisionDetailsRouteArgs({this.key, required this.divisionId});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
   final String divisionId;
 
@@ -973,13 +975,13 @@ class DivisionDetailsRouteArgs {
 
 /// generated route for
 /// [_i19.FridgeCartScreen]
-class FridgeCartRoute extends _i64.PageRouteInfo<FridgeCartRouteArgs> {
+class FridgeCartRoute extends _i65.PageRouteInfo<FridgeCartRouteArgs> {
   FridgeCartRoute({
-    _i65.Key? key,
-    _i66.Store? store,
+    _i66.Key? key,
+    _i67.Store? store,
     String? fridgeId,
     bool restoreCart = false,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          FridgeCartRoute.name,
          args: FridgeCartRouteArgs(
@@ -993,7 +995,7 @@ class FridgeCartRoute extends _i64.PageRouteInfo<FridgeCartRouteArgs> {
 
   static const String name = 'FridgeCartRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<FridgeCartRouteArgs>(
@@ -1017,9 +1019,9 @@ class FridgeCartRouteArgs {
     this.restoreCart = false,
   });
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i66.Store? store;
+  final _i67.Store? store;
 
   final String? fridgeId;
 
@@ -1047,13 +1049,13 @@ class FridgeCartRouteArgs {
 
 /// generated route for
 /// [_i20.FridgeNotSelectedPopup]
-class FridgeNotSelectedPopup extends _i64.PageRouteInfo<void> {
-  const FridgeNotSelectedPopup({List<_i64.PageRouteInfo>? children})
+class FridgeNotSelectedPopup extends _i65.PageRouteInfo<void> {
+  const FridgeNotSelectedPopup({List<_i65.PageRouteInfo>? children})
     : super(FridgeNotSelectedPopup.name, initialChildren: children);
 
   static const String name = 'FridgeNotSelectedPopup';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       return const _i20.FridgeNotSelectedPopup();
@@ -1063,12 +1065,12 @@ class FridgeNotSelectedPopup extends _i64.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i21.FridgeQrScanScreen]
-class FridgeQrScanRoute extends _i64.PageRouteInfo<FridgeQrScanRouteArgs> {
+class FridgeQrScanRoute extends _i65.PageRouteInfo<FridgeQrScanRouteArgs> {
   FridgeQrScanRoute({
-    _i65.Key? key,
+    _i66.Key? key,
     String? fridgeId,
     bool shouldSkipUnfinishedPurchaseGuard = false,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          FridgeQrScanRoute.name,
          args: FridgeQrScanRouteArgs(
@@ -1082,7 +1084,7 @@ class FridgeQrScanRoute extends _i64.PageRouteInfo<FridgeQrScanRouteArgs> {
 
   static const String name = 'FridgeQrScanRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final queryParams = data.queryParams;
@@ -1090,7 +1092,7 @@ class FridgeQrScanRoute extends _i64.PageRouteInfo<FridgeQrScanRouteArgs> {
         orElse: () =>
             FridgeQrScanRouteArgs(fridgeId: queryParams.optString('fridge-id')),
       );
-      return _i64.WrappedRoute(
+      return _i65.WrappedRoute(
         child: _i21.FridgeQrScanScreen(
           key: args.key,
           fridgeId: args.fridgeId,
@@ -1109,7 +1111,7 @@ class FridgeQrScanRouteArgs {
     this.shouldSkipUnfinishedPurchaseGuard = false,
   });
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
   final String? fridgeId;
 
@@ -1139,14 +1141,14 @@ class FridgeQrScanRouteArgs {
 
 /// generated route for
 /// [_i22.FridgeQrScanScreen2]
-class FridgeQrScanRoute2 extends _i64.PageRouteInfo<FridgeQrScanRoute2Args> {
+class FridgeQrScanRoute2 extends _i65.PageRouteInfo<FridgeQrScanRoute2Args> {
   FridgeQrScanRoute2({
-    _i65.Key? key,
-    _i66.Store? store,
+    _i66.Key? key,
+    _i67.Store? store,
     String? fridgeId,
     bool shouldSkipUnfinishedPurchaseGuard = false,
-    required _i70.OrderCreationType creationType,
-    List<_i64.PageRouteInfo>? children,
+    required _i71.OrderCreationType creationType,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          FridgeQrScanRoute2.name,
          args: FridgeQrScanRoute2Args(
@@ -1161,11 +1163,11 @@ class FridgeQrScanRoute2 extends _i64.PageRouteInfo<FridgeQrScanRoute2Args> {
 
   static const String name = 'FridgeQrScanRoute2';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<FridgeQrScanRoute2Args>();
-      return _i64.WrappedRoute(
+      return _i65.WrappedRoute(
         child: _i22.FridgeQrScanScreen2(
           key: args.key,
           store: args.store,
@@ -1188,15 +1190,15 @@ class FridgeQrScanRoute2Args {
     required this.creationType,
   });
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i66.Store? store;
+  final _i67.Store? store;
 
   final String? fridgeId;
 
   final bool shouldSkipUnfinishedPurchaseGuard;
 
-  final _i70.OrderCreationType creationType;
+  final _i71.OrderCreationType creationType;
 
   @override
   String toString() {
@@ -1225,13 +1227,67 @@ class FridgeQrScanRoute2Args {
 }
 
 /// generated route for
-/// [_i23.HasUnfinishedPurchasePopup]
+/// [_i23.FridgeStockScreen]
+class FridgeStockRoute extends _i65.PageRouteInfo<FridgeStockRouteArgs> {
+  FridgeStockRoute({
+    _i66.Key? key,
+    required String deviceId,
+    List<_i65.PageRouteInfo>? children,
+  }) : super(
+         FridgeStockRoute.name,
+         args: FridgeStockRouteArgs(key: key, deviceId: deviceId),
+         rawPathParams: {'deviceId': deviceId},
+         initialChildren: children,
+       );
+
+  static const String name = 'FridgeStockRoute';
+
+  static _i65.PageInfo page = _i65.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<FridgeStockRouteArgs>(
+        orElse: () =>
+            FridgeStockRouteArgs(deviceId: pathParams.getString('deviceId')),
+      );
+      return _i65.WrappedRoute(
+        child: _i23.FridgeStockScreen(key: args.key, deviceId: args.deviceId),
+      );
+    },
+  );
+}
+
+class FridgeStockRouteArgs {
+  const FridgeStockRouteArgs({this.key, required this.deviceId});
+
+  final _i66.Key? key;
+
+  final String deviceId;
+
+  @override
+  String toString() {
+    return 'FridgeStockRouteArgs{key: $key, deviceId: $deviceId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! FridgeStockRouteArgs) return false;
+    return key == other.key && deviceId == other.deviceId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ deviceId.hashCode;
+}
+
+/// generated route for
+/// [_i24.HasUnfinishedPurchasePopup]
 class HasUnfinishedPurchasePopup
-    extends _i64.PageRouteInfo<HasUnfinishedPurchasePopupArgs> {
+    extends _i65.PageRouteInfo<HasUnfinishedPurchasePopupArgs> {
   HasUnfinishedPurchasePopup({
-    _i65.Key? key,
-    required _i65.VoidCallback onActionPressed,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    required _i66.VoidCallback onActionPressed,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          HasUnfinishedPurchasePopup.name,
          args: HasUnfinishedPurchasePopupArgs(
@@ -1243,11 +1299,11 @@ class HasUnfinishedPurchasePopup
 
   static const String name = 'HasUnfinishedPurchasePopup';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<HasUnfinishedPurchasePopupArgs>();
-      return _i23.HasUnfinishedPurchasePopup(
+      return _i24.HasUnfinishedPurchasePopup(
         key: args.key,
         onActionPressed: args.onActionPressed,
       );
@@ -1261,9 +1317,9 @@ class HasUnfinishedPurchasePopupArgs {
     required this.onActionPressed,
   });
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i65.VoidCallback onActionPressed;
+  final _i66.VoidCallback onActionPressed;
 
   @override
   String toString() {
@@ -1282,12 +1338,12 @@ class HasUnfinishedPurchasePopupArgs {
 }
 
 /// generated route for
-/// [_i24.HasUnpaidOrderPopup]
-class HasUnpaidOrderPopup extends _i64.PageRouteInfo<HasUnpaidOrderPopupArgs> {
+/// [_i25.HasUnpaidOrderPopup]
+class HasUnpaidOrderPopup extends _i65.PageRouteInfo<HasUnpaidOrderPopupArgs> {
   HasUnpaidOrderPopup({
-    _i65.Key? key,
-    _i65.VoidCallback? onPayment,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    _i66.VoidCallback? onPayment,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          HasUnpaidOrderPopup.name,
          args: HasUnpaidOrderPopupArgs(key: key, onPayment: onPayment),
@@ -1296,13 +1352,13 @@ class HasUnpaidOrderPopup extends _i64.PageRouteInfo<HasUnpaidOrderPopupArgs> {
 
   static const String name = 'HasUnpaidOrderPopup';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<HasUnpaidOrderPopupArgs>(
         orElse: () => const HasUnpaidOrderPopupArgs(),
       );
-      return _i24.HasUnpaidOrderPopup(key: args.key, onPayment: args.onPayment);
+      return _i25.HasUnpaidOrderPopup(key: args.key, onPayment: args.onPayment);
     },
   );
 }
@@ -1310,9 +1366,9 @@ class HasUnpaidOrderPopup extends _i64.PageRouteInfo<HasUnpaidOrderPopupArgs> {
 class HasUnpaidOrderPopupArgs {
   const HasUnpaidOrderPopupArgs({this.key, this.onPayment});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i65.VoidCallback? onPayment;
+  final _i66.VoidCallback? onPayment;
 
   @override
   String toString() {
@@ -1331,30 +1387,30 @@ class HasUnpaidOrderPopupArgs {
 }
 
 /// generated route for
-/// [_i25.HomeScreen]
-class HomeRoute extends _i64.PageRouteInfo<void> {
-  const HomeRoute({List<_i64.PageRouteInfo>? children})
+/// [_i26.HomeScreen]
+class HomeRoute extends _i65.PageRouteInfo<void> {
+  const HomeRoute({List<_i65.PageRouteInfo>? children})
     : super(HomeRoute.name, initialChildren: children);
 
   static const String name = 'HomeRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return _i64.WrappedRoute(child: const _i25.HomeScreen());
+      return _i65.WrappedRoute(child: const _i26.HomeScreen());
     },
   );
 }
 
 /// generated route for
-/// [_i26.KnowledgeBaseWebviewScreen]
+/// [_i27.KnowledgeBaseWebviewScreen]
 class KnowledgeBaseWebviewRoute
-    extends _i64.PageRouteInfo<KnowledgeBaseWebviewRouteArgs> {
+    extends _i65.PageRouteInfo<KnowledgeBaseWebviewRouteArgs> {
   KnowledgeBaseWebviewRoute({
-    _i69.Key? key,
+    _i70.Key? key,
     required Uri uri,
-    _i71.InAppWebViewSettings? webViewSettings,
-    List<_i64.PageRouteInfo>? children,
+    _i72.InAppWebViewSettings? webViewSettings,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          KnowledgeBaseWebviewRoute.name,
          args: KnowledgeBaseWebviewRouteArgs(
@@ -1367,11 +1423,11 @@ class KnowledgeBaseWebviewRoute
 
   static const String name = 'KnowledgeBaseWebviewRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<KnowledgeBaseWebviewRouteArgs>();
-      return _i26.KnowledgeBaseWebviewScreen(
+      return _i27.KnowledgeBaseWebviewScreen(
         key: args.key,
         uri: args.uri,
         webViewSettings: args.webViewSettings,
@@ -1387,11 +1443,11 @@ class KnowledgeBaseWebviewRouteArgs {
     this.webViewSettings,
   });
 
-  final _i69.Key? key;
+  final _i70.Key? key;
 
   final Uri uri;
 
-  final _i71.InAppWebViewSettings? webViewSettings;
+  final _i72.InAppWebViewSettings? webViewSettings;
 
   @override
   String toString() {
@@ -1412,28 +1468,28 @@ class KnowledgeBaseWebviewRouteArgs {
 }
 
 /// generated route for
-/// [_i27.LegalInfoScreen]
-class LegalInfoRoute extends _i64.PageRouteInfo<void> {
-  const LegalInfoRoute({List<_i64.PageRouteInfo>? children})
+/// [_i28.LegalInfoScreen]
+class LegalInfoRoute extends _i65.PageRouteInfo<void> {
+  const LegalInfoRoute({List<_i65.PageRouteInfo>? children})
     : super(LegalInfoRoute.name, initialChildren: children);
 
   static const String name = 'LegalInfoRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return const _i27.LegalInfoScreen();
+      return const _i28.LegalInfoScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i28.NewOrderInfoScreen]
-class NewOrderInfoRoute extends _i64.PageRouteInfo<NewOrderInfoRouteArgs> {
+/// [_i29.NewOrderInfoScreen]
+class NewOrderInfoRoute extends _i65.PageRouteInfo<NewOrderInfoRouteArgs> {
   NewOrderInfoRoute({
-    _i65.Key? key,
-    _i70.OrderCreationType orderCreationType = _i70.OrderCreationType.order,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    _i71.OrderCreationType orderCreationType = _i71.OrderCreationType.order,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          NewOrderInfoRoute.name,
          args: NewOrderInfoRouteArgs(
@@ -1445,13 +1501,13 @@ class NewOrderInfoRoute extends _i64.PageRouteInfo<NewOrderInfoRouteArgs> {
 
   static const String name = 'NewOrderInfoRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<NewOrderInfoRouteArgs>(
         orElse: () => const NewOrderInfoRouteArgs(),
       );
-      return _i28.NewOrderInfoScreen(
+      return _i29.NewOrderInfoScreen(
         key: args.key,
         orderCreationType: args.orderCreationType,
       );
@@ -1462,12 +1518,12 @@ class NewOrderInfoRoute extends _i64.PageRouteInfo<NewOrderInfoRouteArgs> {
 class NewOrderInfoRouteArgs {
   const NewOrderInfoRouteArgs({
     this.key,
-    this.orderCreationType = _i70.OrderCreationType.order,
+    this.orderCreationType = _i71.OrderCreationType.order,
   });
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i70.OrderCreationType orderCreationType;
+  final _i71.OrderCreationType orderCreationType;
 
   @override
   String toString() {
@@ -1486,12 +1542,12 @@ class NewOrderInfoRouteArgs {
 }
 
 /// generated route for
-/// [_i29.OpenWithoutRegPopup]
-class OpenWithoutRegPopup extends _i64.PageRouteInfo<OpenWithoutRegPopupArgs> {
+/// [_i30.OpenWithoutRegPopup]
+class OpenWithoutRegPopup extends _i65.PageRouteInfo<OpenWithoutRegPopupArgs> {
   OpenWithoutRegPopup({
-    _i65.Key? key,
-    _i65.VoidCallback? onPressed,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    _i66.VoidCallback? onPressed,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          OpenWithoutRegPopup.name,
          args: OpenWithoutRegPopupArgs(key: key, onPressed: onPressed),
@@ -1500,13 +1556,13 @@ class OpenWithoutRegPopup extends _i64.PageRouteInfo<OpenWithoutRegPopupArgs> {
 
   static const String name = 'OpenWithoutRegPopup';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<OpenWithoutRegPopupArgs>(
         orElse: () => const OpenWithoutRegPopupArgs(),
       );
-      return _i29.OpenWithoutRegPopup(key: args.key, onPressed: args.onPressed);
+      return _i30.OpenWithoutRegPopup(key: args.key, onPressed: args.onPressed);
     },
   );
 }
@@ -1514,9 +1570,9 @@ class OpenWithoutRegPopup extends _i64.PageRouteInfo<OpenWithoutRegPopupArgs> {
 class OpenWithoutRegPopupArgs {
   const OpenWithoutRegPopupArgs({this.key, this.onPressed});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i65.VoidCallback? onPressed;
+  final _i66.VoidCallback? onPressed;
 
   @override
   String toString() {
@@ -1535,49 +1591,49 @@ class OpenWithoutRegPopupArgs {
 }
 
 /// generated route for
-/// [_i30.OrderFormScreen]
-class OrderFormRoute extends _i64.PageRouteInfo<void> {
-  const OrderFormRoute({List<_i64.PageRouteInfo>? children})
+/// [_i31.OrderFormScreen]
+class OrderFormRoute extends _i65.PageRouteInfo<void> {
+  const OrderFormRoute({List<_i65.PageRouteInfo>? children})
     : super(OrderFormRoute.name, initialChildren: children);
 
   static const String name = 'OrderFormRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return const _i30.OrderFormScreen();
+      return const _i31.OrderFormScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i31.OrderLoadingScreen]
-class OrderLoadingRoute extends _i64.PageRouteInfo<void> {
-  const OrderLoadingRoute({List<_i64.PageRouteInfo>? children})
+/// [_i32.OrderLoadingScreen]
+class OrderLoadingRoute extends _i65.PageRouteInfo<void> {
+  const OrderLoadingRoute({List<_i65.PageRouteInfo>? children})
     : super(OrderLoadingRoute.name, initialChildren: children);
 
   static const String name = 'OrderLoadingRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return const _i31.OrderLoadingScreen();
+      return const _i32.OrderLoadingScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i32.PaymentCompletionScreen]
+/// [_i33.PaymentCompletionScreen]
 class PaymentCompletionRoute
-    extends _i64.PageRouteInfo<PaymentCompletionRouteArgs> {
+    extends _i65.PageRouteInfo<PaymentCompletionRouteArgs> {
   PaymentCompletionRoute({
-    _i65.Key? key,
-    required _i72.Payment payment,
+    _i66.Key? key,
+    required _i73.Payment payment,
     required String storeId,
-    required _i65.VoidCallback? onFailedPayment,
+    required _i66.VoidCallback? onFailedPayment,
     required String currencySymbol,
-    _i65.VoidCallback? onPayment,
-    List<_i64.PageRouteInfo>? children,
+    _i66.VoidCallback? onPayment,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          PaymentCompletionRoute.name,
          args: PaymentCompletionRouteArgs(
@@ -1593,12 +1649,12 @@ class PaymentCompletionRoute
 
   static const String name = 'PaymentCompletionRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<PaymentCompletionRouteArgs>();
-      return _i64.WrappedRoute(
-        child: _i32.PaymentCompletionScreen(
+      return _i65.WrappedRoute(
+        child: _i33.PaymentCompletionScreen(
           key: args.key,
           payment: args.payment,
           storeId: args.storeId,
@@ -1621,17 +1677,17 @@ class PaymentCompletionRouteArgs {
     this.onPayment,
   });
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i72.Payment payment;
+  final _i73.Payment payment;
 
   final String storeId;
 
-  final _i65.VoidCallback? onFailedPayment;
+  final _i66.VoidCallback? onFailedPayment;
 
   final String currencySymbol;
 
-  final _i65.VoidCallback? onPayment;
+  final _i66.VoidCallback? onPayment;
 
   @override
   String toString() {
@@ -1661,16 +1717,16 @@ class PaymentCompletionRouteArgs {
 }
 
 /// generated route for
-/// [_i33.PaymentCompletionWaitingScreen]
+/// [_i34.PaymentCompletionWaitingScreen]
 class PaymentCompletionWaitingRoute
-    extends _i64.PageRouteInfo<PaymentCompletionWaitingRouteArgs> {
+    extends _i65.PageRouteInfo<PaymentCompletionWaitingRouteArgs> {
   PaymentCompletionWaitingRoute({
-    _i65.Key? key,
+    _i66.Key? key,
     required String paymentId,
     required String storeId,
-    required _i65.VoidCallback? onFailedPayment,
-    _i65.VoidCallback? onPayment,
-    List<_i64.PageRouteInfo>? children,
+    required _i66.VoidCallback? onFailedPayment,
+    _i66.VoidCallback? onPayment,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          PaymentCompletionWaitingRoute.name,
          args: PaymentCompletionWaitingRouteArgs(
@@ -1685,12 +1741,12 @@ class PaymentCompletionWaitingRoute
 
   static const String name = 'PaymentCompletionWaitingRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<PaymentCompletionWaitingRouteArgs>();
-      return _i64.WrappedRoute(
-        child: _i33.PaymentCompletionWaitingScreen(
+      return _i65.WrappedRoute(
+        child: _i34.PaymentCompletionWaitingScreen(
           key: args.key,
           paymentId: args.paymentId,
           storeId: args.storeId,
@@ -1711,15 +1767,15 @@ class PaymentCompletionWaitingRouteArgs {
     this.onPayment,
   });
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
   final String paymentId;
 
   final String storeId;
 
-  final _i65.VoidCallback? onFailedPayment;
+  final _i66.VoidCallback? onFailedPayment;
 
-  final _i65.VoidCallback? onPayment;
+  final _i66.VoidCallback? onPayment;
 
   @override
   String toString() {
@@ -1747,12 +1803,12 @@ class PaymentCompletionWaitingRouteArgs {
 }
 
 /// generated route for
-/// [_i34.PhoneInputScreen]
-class PhoneInputRoute extends _i64.PageRouteInfo<PhoneInputRouteArgs> {
+/// [_i35.PhoneInputScreen]
+class PhoneInputRoute extends _i65.PageRouteInfo<PhoneInputRouteArgs> {
   PhoneInputRoute({
-    _i68.Key? key,
+    _i69.Key? key,
     bool canSkipAuth = true,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          PhoneInputRoute.name,
          args: PhoneInputRouteArgs(key: key, canSkipAuth: canSkipAuth),
@@ -1761,13 +1817,13 @@ class PhoneInputRoute extends _i64.PageRouteInfo<PhoneInputRouteArgs> {
 
   static const String name = 'PhoneInputRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<PhoneInputRouteArgs>(
         orElse: () => const PhoneInputRouteArgs(),
       );
-      return _i34.PhoneInputScreen(
+      return _i35.PhoneInputScreen(
         key: args.key,
         canSkipAuth: args.canSkipAuth,
       );
@@ -1778,7 +1834,7 @@ class PhoneInputRoute extends _i64.PageRouteInfo<PhoneInputRouteArgs> {
 class PhoneInputRouteArgs {
   const PhoneInputRouteArgs({this.key, this.canSkipAuth = true});
 
-  final _i68.Key? key;
+  final _i69.Key? key;
 
   final bool canSkipAuth;
 
@@ -1799,14 +1855,14 @@ class PhoneInputRouteArgs {
 }
 
 /// generated route for
-/// [_i35.PointListModalScreen]
-class PointListModalRoute extends _i64.PageRouteInfo<PointListModalRouteArgs> {
+/// [_i36.PointListModalScreen]
+class PointListModalRoute extends _i65.PageRouteInfo<PointListModalRouteArgs> {
   PointListModalRoute({
-    _i68.Key? key,
-    List<_i66.Store>? stores,
+    _i69.Key? key,
+    List<_i67.Store>? stores,
     bool autofocusOnSearch = false,
-    _i68.Widget? title,
-    List<_i64.PageRouteInfo>? children,
+    _i69.Widget? title,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          PointListModalRoute.name,
          args: PointListModalRouteArgs(
@@ -1820,14 +1876,14 @@ class PointListModalRoute extends _i64.PageRouteInfo<PointListModalRouteArgs> {
 
   static const String name = 'PointListModalRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<PointListModalRouteArgs>(
         orElse: () => const PointListModalRouteArgs(),
       );
-      return _i64.WrappedRoute(
-        child: _i35.PointListModalScreen(
+      return _i65.WrappedRoute(
+        child: _i36.PointListModalScreen(
           key: args.key,
           stores: args.stores,
           autofocusOnSearch: args.autofocusOnSearch,
@@ -1846,13 +1902,13 @@ class PointListModalRouteArgs {
     this.title,
   });
 
-  final _i68.Key? key;
+  final _i69.Key? key;
 
-  final List<_i66.Store>? stores;
+  final List<_i67.Store>? stores;
 
   final bool autofocusOnSearch;
 
-  final _i68.Widget? title;
+  final _i69.Widget? title;
 
   @override
   String toString() {
@@ -1864,7 +1920,7 @@ class PointListModalRouteArgs {
     if (identical(this, other)) return true;
     if (other is! PointListModalRouteArgs) return false;
     return key == other.key &&
-        const _i73.ListEquality<_i66.Store>().equals(stores, other.stores) &&
+        const _i74.ListEquality<_i67.Store>().equals(stores, other.stores) &&
         autofocusOnSearch == other.autofocusOnSearch &&
         title == other.title;
   }
@@ -1872,35 +1928,35 @@ class PointListModalRouteArgs {
   @override
   int get hashCode =>
       key.hashCode ^
-      const _i73.ListEquality<_i66.Store>().hash(stores) ^
+      const _i74.ListEquality<_i67.Store>().hash(stores) ^
       autofocusOnSearch.hashCode ^
       title.hashCode;
 }
 
 /// generated route for
-/// [_i36.ProfileScreen]
-class ProfileRoute extends _i64.PageRouteInfo<void> {
-  const ProfileRoute({List<_i64.PageRouteInfo>? children})
+/// [_i37.ProfileScreen]
+class ProfileRoute extends _i65.PageRouteInfo<void> {
+  const ProfileRoute({List<_i65.PageRouteInfo>? children})
     : super(ProfileRoute.name, initialChildren: children);
 
   static const String name = 'ProfileRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return const _i36.ProfileScreen();
+      return const _i37.ProfileScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i37.QrReportProblemPopup]
+/// [_i38.QrReportProblemPopup]
 class QrReportProblemPopup
-    extends _i64.PageRouteInfo<QrReportProblemPopupArgs> {
+    extends _i65.PageRouteInfo<QrReportProblemPopupArgs> {
   QrReportProblemPopup({
-    _i65.Key? key,
+    _i66.Key? key,
     String? error,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          QrReportProblemPopup.name,
          args: QrReportProblemPopupArgs(key: key, error: error),
@@ -1909,14 +1965,14 @@ class QrReportProblemPopup
 
   static const String name = 'QrReportProblemPopup';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<QrReportProblemPopupArgs>(
         orElse: () => const QrReportProblemPopupArgs(),
       );
-      return _i64.WrappedRoute(
-        child: _i37.QrReportProblemPopup(key: args.key, error: args.error),
+      return _i65.WrappedRoute(
+        child: _i38.QrReportProblemPopup(key: args.key, error: args.error),
       );
     },
   );
@@ -1925,7 +1981,7 @@ class QrReportProblemPopup
 class QrReportProblemPopupArgs {
   const QrReportProblemPopupArgs({this.key, this.error});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
   final String? error;
 
@@ -1946,61 +2002,61 @@ class QrReportProblemPopupArgs {
 }
 
 /// generated route for
-/// [_i38.QrScanScreen]
-class QrScanRoute extends _i64.PageRouteInfo<void> {
-  const QrScanRoute({List<_i64.PageRouteInfo>? children})
+/// [_i39.QrScanScreen]
+class QrScanRoute extends _i65.PageRouteInfo<void> {
+  const QrScanRoute({List<_i65.PageRouteInfo>? children})
     : super(QrScanRoute.name, initialChildren: children);
 
   static const String name = 'QrScanRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return _i64.WrappedRoute(child: const _i38.QrScanScreen());
+      return _i65.WrappedRoute(child: const _i39.QrScanScreen());
     },
   );
 }
 
 /// generated route for
-/// [_i39.ReportProblemPopup]
-class ReportProblemPopup extends _i64.PageRouteInfo<void> {
-  const ReportProblemPopup({List<_i64.PageRouteInfo>? children})
+/// [_i40.ReportProblemPopup]
+class ReportProblemPopup extends _i65.PageRouteInfo<void> {
+  const ReportProblemPopup({List<_i65.PageRouteInfo>? children})
     : super(ReportProblemPopup.name, initialChildren: children);
 
   static const String name = 'ReportProblemPopup';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return _i64.WrappedRoute(child: const _i39.ReportProblemPopup());
+      return _i65.WrappedRoute(child: const _i40.ReportProblemPopup());
     },
   );
 }
 
 /// generated route for
-/// [_i40.ReportProblemScreen]
-class ReportProblemRoute extends _i64.PageRouteInfo<void> {
-  const ReportProblemRoute({List<_i64.PageRouteInfo>? children})
+/// [_i41.ReportProblemScreen]
+class ReportProblemRoute extends _i65.PageRouteInfo<void> {
+  const ReportProblemRoute({List<_i65.PageRouteInfo>? children})
     : super(ReportProblemRoute.name, initialChildren: children);
 
   static const String name = 'ReportProblemRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return _i64.WrappedRoute(child: const _i40.ReportProblemScreen());
+      return _i65.WrappedRoute(child: const _i41.ReportProblemScreen());
     },
   );
 }
 
 /// generated route for
-/// [_i41.ReportScreen]
-class ReportRoute extends _i64.PageRouteInfo<ReportRouteArgs> {
+/// [_i42.ReportScreen]
+class ReportRoute extends _i65.PageRouteInfo<ReportRouteArgs> {
   ReportRoute({
-    _i65.Key? key,
+    _i66.Key? key,
     required String id,
     required String? unitId,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          ReportRoute.name,
          args: ReportRouteArgs(key: key, id: id, unitId: unitId),
@@ -2011,7 +2067,7 @@ class ReportRoute extends _i64.PageRouteInfo<ReportRouteArgs> {
 
   static const String name = 'ReportRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
@@ -2022,8 +2078,8 @@ class ReportRoute extends _i64.PageRouteInfo<ReportRouteArgs> {
           unitId: queryParams.optString('unitId'),
         ),
       );
-      return _i64.WrappedRoute(
-        child: _i41.ReportScreen(
+      return _i65.WrappedRoute(
+        child: _i42.ReportScreen(
           key: args.key,
           id: args.id,
           unitId: args.unitId,
@@ -2036,7 +2092,7 @@ class ReportRoute extends _i64.PageRouteInfo<ReportRouteArgs> {
 class ReportRouteArgs {
   const ReportRouteArgs({this.key, required this.id, required this.unitId});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
   final String id;
 
@@ -2059,12 +2115,12 @@ class ReportRouteArgs {
 }
 
 /// generated route for
-/// [_i42.ReviewDetailsScreen]
-class ReviewDetailsRoute extends _i64.PageRouteInfo<ReviewDetailsRouteArgs> {
+/// [_i43.ReviewDetailsScreen]
+class ReviewDetailsRoute extends _i65.PageRouteInfo<ReviewDetailsRouteArgs> {
   ReviewDetailsRoute({
-    _i65.Key? key,
+    _i66.Key? key,
     required String reviewId,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          ReviewDetailsRoute.name,
          args: ReviewDetailsRouteArgs(key: key, reviewId: reviewId),
@@ -2074,7 +2130,7 @@ class ReviewDetailsRoute extends _i64.PageRouteInfo<ReviewDetailsRouteArgs> {
 
   static const String name = 'ReviewDetailsRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
@@ -2082,8 +2138,8 @@ class ReviewDetailsRoute extends _i64.PageRouteInfo<ReviewDetailsRouteArgs> {
         orElse: () =>
             ReviewDetailsRouteArgs(reviewId: pathParams.getString('reviewId')),
       );
-      return _i64.WrappedRoute(
-        child: _i42.ReviewDetailsScreen(key: args.key, reviewId: args.reviewId),
+      return _i65.WrappedRoute(
+        child: _i43.ReviewDetailsScreen(key: args.key, reviewId: args.reviewId),
       );
     },
   );
@@ -2092,7 +2148,7 @@ class ReviewDetailsRoute extends _i64.PageRouteInfo<ReviewDetailsRouteArgs> {
 class ReviewDetailsRouteArgs {
   const ReviewDetailsRouteArgs({this.key, required this.reviewId});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
   final String reviewId;
 
@@ -2113,14 +2169,14 @@ class ReviewDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i43.ReviewsScreen]
-class ReviewsRoute extends _i64.PageRouteInfo<ReviewsRouteArgs> {
+/// [_i44.ReviewsScreen]
+class ReviewsRoute extends _i65.PageRouteInfo<ReviewsRouteArgs> {
   ReviewsRoute({
-    _i65.Key? key,
+    _i66.Key? key,
     String? storeId,
     String? storeName,
     String? storeAddress,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          ReviewsRoute.name,
          args: ReviewsRouteArgs(
@@ -2139,7 +2195,7 @@ class ReviewsRoute extends _i64.PageRouteInfo<ReviewsRouteArgs> {
 
   static const String name = 'ReviewsRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final queryParams = data.queryParams;
@@ -2150,8 +2206,8 @@ class ReviewsRoute extends _i64.PageRouteInfo<ReviewsRouteArgs> {
           storeAddress: queryParams.optString('storeAddress'),
         ),
       );
-      return _i64.WrappedRoute(
-        child: _i43.ReviewsScreen(
+      return _i65.WrappedRoute(
+        child: _i44.ReviewsScreen(
           key: args.key,
           storeId: args.storeId,
           storeName: args.storeName,
@@ -2170,7 +2226,7 @@ class ReviewsRouteArgs {
     this.storeAddress,
   });
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
   final String? storeId;
 
@@ -2202,14 +2258,14 @@ class ReviewsRouteArgs {
 }
 
 /// generated route for
-/// [_i44.ScanCartScreen]
-class ScanCartRoute extends _i64.PageRouteInfo<ScanCartRouteArgs> {
+/// [_i45.ScanCartScreen]
+class ScanCartRoute extends _i65.PageRouteInfo<ScanCartRouteArgs> {
   ScanCartRoute({
-    _i65.Key? key,
-    _i66.Store? store,
+    _i66.Key? key,
+    _i67.Store? store,
     String? fridgeId,
     bool restoreCart = false,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          ScanCartRoute.name,
          args: ScanCartRouteArgs(
@@ -2223,13 +2279,13 @@ class ScanCartRoute extends _i64.PageRouteInfo<ScanCartRouteArgs> {
 
   static const String name = 'ScanCartRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ScanCartRouteArgs>(
         orElse: () => const ScanCartRouteArgs(),
       );
-      return _i44.ScanCartScreen(
+      return _i45.ScanCartScreen(
         key: args.key,
         store: args.store,
         fridgeId: args.fridgeId,
@@ -2247,9 +2303,9 @@ class ScanCartRouteArgs {
     this.restoreCart = false,
   });
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i66.Store? store;
+  final _i67.Store? store;
 
   final String? fridgeId;
 
@@ -2276,28 +2332,28 @@ class ScanCartRouteArgs {
 }
 
 /// generated route for
-/// [_i45.ScanFridgeScreen]
-class ScanFridgeRoute extends _i64.PageRouteInfo<void> {
-  const ScanFridgeRoute({List<_i64.PageRouteInfo>? children})
+/// [_i46.ScanFridgeScreen]
+class ScanFridgeRoute extends _i65.PageRouteInfo<void> {
+  const ScanFridgeRoute({List<_i65.PageRouteInfo>? children})
     : super(ScanFridgeRoute.name, initialChildren: children);
 
   static const String name = 'ScanFridgeRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return const _i45.ScanFridgeScreen();
+      return const _i46.ScanFridgeScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i46.ScanProductScreen]
-class ScanProductRoute extends _i64.PageRouteInfo<ScanProductRouteArgs> {
+/// [_i47.ScanProductScreen]
+class ScanProductRoute extends _i65.PageRouteInfo<ScanProductRouteArgs> {
   ScanProductRoute({
-    _i65.Key? key,
-    required _i65.VoidCallback onPressedNext,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    required _i66.VoidCallback onPressedNext,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          ScanProductRoute.name,
          args: ScanProductRouteArgs(key: key, onPressedNext: onPressedNext),
@@ -2306,11 +2362,11 @@ class ScanProductRoute extends _i64.PageRouteInfo<ScanProductRouteArgs> {
 
   static const String name = 'ScanProductRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<ScanProductRouteArgs>();
-      return _i46.ScanProductScreen(
+      return _i47.ScanProductScreen(
         key: args.key,
         onPressedNext: args.onPressedNext,
       );
@@ -2321,9 +2377,9 @@ class ScanProductRoute extends _i64.PageRouteInfo<ScanProductRouteArgs> {
 class ScanProductRouteArgs {
   const ScanProductRouteArgs({this.key, required this.onPressedNext});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i65.VoidCallback onPressedNext;
+  final _i66.VoidCallback onPressedNext;
 
   @override
   String toString() {
@@ -2342,12 +2398,12 @@ class ScanProductRouteArgs {
 }
 
 /// generated route for
-/// [_i47.SendFeedBackPopup]
-class SendFeedBackPopup extends _i64.PageRouteInfo<SendFeedBackPopupArgs> {
+/// [_i48.SendFeedBackPopup]
+class SendFeedBackPopup extends _i65.PageRouteInfo<SendFeedBackPopupArgs> {
   SendFeedBackPopup({
-    _i65.Key? key,
-    _i65.VoidCallback? onPayment,
-    List<_i64.PageRouteInfo>? children,
+    _i66.Key? key,
+    _i66.VoidCallback? onPayment,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          SendFeedBackPopup.name,
          args: SendFeedBackPopupArgs(key: key, onPayment: onPayment),
@@ -2356,14 +2412,14 @@ class SendFeedBackPopup extends _i64.PageRouteInfo<SendFeedBackPopupArgs> {
 
   static const String name = 'SendFeedBackPopup';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<SendFeedBackPopupArgs>(
         orElse: () => const SendFeedBackPopupArgs(),
       );
-      return _i64.WrappedRoute(
-        child: _i47.SendFeedBackPopup(key: args.key, onPayment: args.onPayment),
+      return _i65.WrappedRoute(
+        child: _i48.SendFeedBackPopup(key: args.key, onPayment: args.onPayment),
       );
     },
   );
@@ -2372,9 +2428,9 @@ class SendFeedBackPopup extends _i64.PageRouteInfo<SendFeedBackPopupArgs> {
 class SendFeedBackPopupArgs {
   const SendFeedBackPopupArgs({this.key, this.onPayment});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
-  final _i65.VoidCallback? onPayment;
+  final _i66.VoidCallback? onPayment;
 
   @override
   String toString() {
@@ -2393,44 +2449,44 @@ class SendFeedBackPopupArgs {
 }
 
 /// generated route for
-/// [_i48.SplashErrorScreen]
-class SplashErrorRoute extends _i64.PageRouteInfo<void> {
-  const SplashErrorRoute({List<_i64.PageRouteInfo>? children})
+/// [_i49.SplashErrorScreen]
+class SplashErrorRoute extends _i65.PageRouteInfo<void> {
+  const SplashErrorRoute({List<_i65.PageRouteInfo>? children})
     : super(SplashErrorRoute.name, initialChildren: children);
 
   static const String name = 'SplashErrorRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return const _i48.SplashErrorScreen();
+      return const _i49.SplashErrorScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i49.SplashLoadingScreen]
-class SplashLoadingRoute extends _i64.PageRouteInfo<void> {
-  const SplashLoadingRoute({List<_i64.PageRouteInfo>? children})
+/// [_i50.SplashLoadingScreen]
+class SplashLoadingRoute extends _i65.PageRouteInfo<void> {
+  const SplashLoadingRoute({List<_i65.PageRouteInfo>? children})
     : super(SplashLoadingRoute.name, initialChildren: children);
 
   static const String name = 'SplashLoadingRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return const _i49.SplashLoadingScreen();
+      return const _i50.SplashLoadingScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i50.SplashScreen]
-class SplashRoute extends _i64.PageRouteInfo<SplashRouteArgs> {
+/// [_i51.SplashScreen]
+class SplashRoute extends _i65.PageRouteInfo<SplashRouteArgs> {
   SplashRoute({
-    _i65.Key? key,
+    _i66.Key? key,
     void Function(String?)? onLoad,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          SplashRoute.name,
          args: SplashRouteArgs(key: key, onLoad: onLoad),
@@ -2439,14 +2495,14 @@ class SplashRoute extends _i64.PageRouteInfo<SplashRouteArgs> {
 
   static const String name = 'SplashRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<SplashRouteArgs>(
         orElse: () => const SplashRouteArgs(),
       );
-      return _i64.WrappedRoute(
-        child: _i50.SplashScreen(key: args.key, onLoad: args.onLoad),
+      return _i65.WrappedRoute(
+        child: _i51.SplashScreen(key: args.key, onLoad: args.onLoad),
       );
     },
   );
@@ -2455,7 +2511,7 @@ class SplashRoute extends _i64.PageRouteInfo<SplashRouteArgs> {
 class SplashRouteArgs {
   const SplashRouteArgs({this.key, this.onLoad});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
   final void Function(String?)? onLoad;
 
@@ -2476,28 +2532,28 @@ class SplashRouteArgs {
 }
 
 /// generated route for
-/// [_i51.SplashUpdateScreen]
-class SplashUpdateRoute extends _i64.PageRouteInfo<void> {
-  const SplashUpdateRoute({List<_i64.PageRouteInfo>? children})
+/// [_i52.SplashUpdateScreen]
+class SplashUpdateRoute extends _i65.PageRouteInfo<void> {
+  const SplashUpdateRoute({List<_i65.PageRouteInfo>? children})
     : super(SplashUpdateRoute.name, initialChildren: children);
 
   static const String name = 'SplashUpdateRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return const _i51.SplashUpdateScreen();
+      return const _i52.SplashUpdateScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i52.StartScreen]
-class StartRoute extends _i64.PageRouteInfo<StartRouteArgs> {
+/// [_i53.StartScreen]
+class StartRoute extends _i65.PageRouteInfo<StartRouteArgs> {
   StartRoute({
-    _i65.Key? key,
+    _i66.Key? key,
     bool canSkipAuth = true,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          StartRoute.name,
          args: StartRouteArgs(key: key, canSkipAuth: canSkipAuth),
@@ -2506,13 +2562,13 @@ class StartRoute extends _i64.PageRouteInfo<StartRouteArgs> {
 
   static const String name = 'StartRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<StartRouteArgs>(
         orElse: () => const StartRouteArgs(),
       );
-      return _i52.StartScreen(key: args.key, canSkipAuth: args.canSkipAuth);
+      return _i53.StartScreen(key: args.key, canSkipAuth: args.canSkipAuth);
     },
   );
 }
@@ -2520,7 +2576,7 @@ class StartRoute extends _i64.PageRouteInfo<StartRouteArgs> {
 class StartRouteArgs {
   const StartRouteArgs({this.key, this.canSkipAuth = true});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
   final bool canSkipAuth;
 
@@ -2541,28 +2597,28 @@ class StartRouteArgs {
 }
 
 /// generated route for
-/// [_i53.SupportChatScreen]
-class SupportChatRoute extends _i64.PageRouteInfo<void> {
-  const SupportChatRoute({List<_i64.PageRouteInfo>? children})
+/// [_i54.SupportChatScreen]
+class SupportChatRoute extends _i65.PageRouteInfo<void> {
+  const SupportChatRoute({List<_i65.PageRouteInfo>? children})
     : super(SupportChatRoute.name, initialChildren: children);
 
   static const String name = 'SupportChatRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return const _i53.SupportChatScreen();
+      return const _i54.SupportChatScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i54.UnitEventsScreen]
-class UnitEventsRoute extends _i64.PageRouteInfo<UnitEventsRouteArgs> {
+/// [_i55.UnitEventsScreen]
+class UnitEventsRoute extends _i65.PageRouteInfo<UnitEventsRouteArgs> {
   UnitEventsRoute({
-    _i65.Key? key,
+    _i66.Key? key,
     required String unitId,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          UnitEventsRoute.name,
          args: UnitEventsRouteArgs(key: key, unitId: unitId),
@@ -2572,7 +2628,7 @@ class UnitEventsRoute extends _i64.PageRouteInfo<UnitEventsRouteArgs> {
 
   static const String name = 'UnitEventsRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
@@ -2580,8 +2636,8 @@ class UnitEventsRoute extends _i64.PageRouteInfo<UnitEventsRouteArgs> {
         orElse: () =>
             UnitEventsRouteArgs(unitId: pathParams.getString('unitId')),
       );
-      return _i64.WrappedRoute(
-        child: _i54.UnitEventsScreen(key: args.key, unitId: args.unitId),
+      return _i65.WrappedRoute(
+        child: _i55.UnitEventsScreen(key: args.key, unitId: args.unitId),
       );
     },
   );
@@ -2590,7 +2646,7 @@ class UnitEventsRoute extends _i64.PageRouteInfo<UnitEventsRouteArgs> {
 class UnitEventsRouteArgs {
   const UnitEventsRouteArgs({this.key, required this.unitId});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
   final String unitId;
 
@@ -2611,12 +2667,12 @@ class UnitEventsRouteArgs {
 }
 
 /// generated route for
-/// [_i55.UnitTempScreen]
-class UnitTempRoute extends _i64.PageRouteInfo<UnitTempRouteArgs> {
+/// [_i56.UnitTempScreen]
+class UnitTempRoute extends _i65.PageRouteInfo<UnitTempRouteArgs> {
   UnitTempRoute({
-    _i65.Key? key,
+    _i66.Key? key,
     required String unitId,
-    List<_i64.PageRouteInfo>? children,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          UnitTempRoute.name,
          args: UnitTempRouteArgs(key: key, unitId: unitId),
@@ -2626,15 +2682,15 @@ class UnitTempRoute extends _i64.PageRouteInfo<UnitTempRouteArgs> {
 
   static const String name = 'UnitTempRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
       final args = data.argsAs<UnitTempRouteArgs>(
         orElse: () => UnitTempRouteArgs(unitId: pathParams.getString('unitId')),
       );
-      return _i64.WrappedRoute(
-        child: _i55.UnitTempScreen(key: args.key, unitId: args.unitId),
+      return _i65.WrappedRoute(
+        child: _i56.UnitTempScreen(key: args.key, unitId: args.unitId),
       );
     },
   );
@@ -2643,7 +2699,7 @@ class UnitTempRoute extends _i64.PageRouteInfo<UnitTempRouteArgs> {
 class UnitTempRouteArgs {
   const UnitTempRouteArgs({this.key, required this.unitId});
 
-  final _i65.Key? key;
+  final _i66.Key? key;
 
   final String unitId;
 
@@ -2664,93 +2720,93 @@ class UnitTempRouteArgs {
 }
 
 /// generated route for
-/// [_i56.UserBannedPopup]
-class UserBannedPopup extends _i64.PageRouteInfo<void> {
-  const UserBannedPopup({List<_i64.PageRouteInfo>? children})
+/// [_i57.UserBannedPopup]
+class UserBannedPopup extends _i65.PageRouteInfo<void> {
+  const UserBannedPopup({List<_i65.PageRouteInfo>? children})
     : super(UserBannedPopup.name, initialChildren: children);
 
   static const String name = 'UserBannedPopup';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return _i64.WrappedRoute(child: const _i56.UserBannedPopup());
+      return _i65.WrappedRoute(child: const _i57.UserBannedPopup());
     },
   );
 }
 
 /// generated route for
-/// [_i57.UserDataScreen]
-class UserDataRoute extends _i64.PageRouteInfo<void> {
-  const UserDataRoute({List<_i64.PageRouteInfo>? children})
+/// [_i58.UserDataScreen]
+class UserDataRoute extends _i65.PageRouteInfo<void> {
+  const UserDataRoute({List<_i65.PageRouteInfo>? children})
     : super(UserDataRoute.name, initialChildren: children);
 
   static const String name = 'UserDataRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return _i64.WrappedRoute(child: const _i57.UserDataScreen());
+      return _i65.WrappedRoute(child: const _i58.UserDataScreen());
     },
   );
 }
 
 /// generated route for
-/// [_i58.UserProfileScreen]
-class UserProfileRoute extends _i64.PageRouteInfo<void> {
-  const UserProfileRoute({List<_i64.PageRouteInfo>? children})
+/// [_i59.UserProfileScreen]
+class UserProfileRoute extends _i65.PageRouteInfo<void> {
+  const UserProfileRoute({List<_i65.PageRouteInfo>? children})
     : super(UserProfileRoute.name, initialChildren: children);
 
   static const String name = 'UserProfileRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return _i64.WrappedRoute(child: const _i58.UserProfileScreen());
+      return _i65.WrappedRoute(child: const _i59.UserProfileScreen());
     },
   );
 }
 
 /// generated route for
-/// [_i59.VendistaAuthScreen]
-class VendistaAuthRoute extends _i64.PageRouteInfo<void> {
-  const VendistaAuthRoute({List<_i64.PageRouteInfo>? children})
+/// [_i60.VendistaAuthScreen]
+class VendistaAuthRoute extends _i65.PageRouteInfo<void> {
+  const VendistaAuthRoute({List<_i65.PageRouteInfo>? children})
     : super(VendistaAuthRoute.name, initialChildren: children);
 
   static const String name = 'VendistaAuthRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return const _i59.VendistaAuthScreen();
+      return const _i60.VendistaAuthScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i60.VendistaChooseIdScreen]
-class VendistaChooseIdRoute extends _i64.PageRouteInfo<void> {
-  const VendistaChooseIdRoute({List<_i64.PageRouteInfo>? children})
+/// [_i61.VendistaChooseIdScreen]
+class VendistaChooseIdRoute extends _i65.PageRouteInfo<void> {
+  const VendistaChooseIdRoute({List<_i65.PageRouteInfo>? children})
     : super(VendistaChooseIdRoute.name, initialChildren: children);
 
   static const String name = 'VendistaChooseIdRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return const _i60.VendistaChooseIdScreen();
+      return const _i61.VendistaChooseIdScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i61.VendistaRequestDetailsScreen]
+/// [_i62.VendistaRequestDetailsScreen]
 class VendistaRequestDetailsRoute
-    extends _i64.PageRouteInfo<VendistaRequestDetailsRouteArgs> {
+    extends _i65.PageRouteInfo<VendistaRequestDetailsRouteArgs> {
   VendistaRequestDetailsRoute({
-    _i68.Key? key,
-    required _i74.VendistaRequest request,
-    List<_i64.PageRouteInfo>? children,
+    _i69.Key? key,
+    required _i75.VendistaRequest request,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          VendistaRequestDetailsRoute.name,
          args: VendistaRequestDetailsRouteArgs(key: key, request: request),
@@ -2759,12 +2815,12 @@ class VendistaRequestDetailsRoute
 
   static const String name = 'VendistaRequestDetailsRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<VendistaRequestDetailsRouteArgs>();
-      return _i64.WrappedRoute(
-        child: _i61.VendistaRequestDetailsScreen(
+      return _i65.WrappedRoute(
+        child: _i62.VendistaRequestDetailsScreen(
           key: args.key,
           request: args.request,
         ),
@@ -2776,9 +2832,9 @@ class VendistaRequestDetailsRoute
 class VendistaRequestDetailsRouteArgs {
   const VendistaRequestDetailsRouteArgs({this.key, required this.request});
 
-  final _i68.Key? key;
+  final _i69.Key? key;
 
-  final _i74.VendistaRequest request;
+  final _i75.VendistaRequest request;
 
   @override
   String toString() {
@@ -2797,29 +2853,29 @@ class VendistaRequestDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i62.VendistaRequestsScreen]
-class VendistaRequestsRoute extends _i64.PageRouteInfo<void> {
-  const VendistaRequestsRoute({List<_i64.PageRouteInfo>? children})
+/// [_i63.VendistaRequestsScreen]
+class VendistaRequestsRoute extends _i65.PageRouteInfo<void> {
+  const VendistaRequestsRoute({List<_i65.PageRouteInfo>? children})
     : super(VendistaRequestsRoute.name, initialChildren: children);
 
   static const String name = 'VendistaRequestsRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
-      return _i64.WrappedRoute(child: const _i62.VendistaRequestsScreen());
+      return _i65.WrappedRoute(child: const _i63.VendistaRequestsScreen());
     },
   );
 }
 
 /// generated route for
-/// [_i63.WebViewPaymentScreen]
-class WebViewPaymentRoute extends _i64.PageRouteInfo<WebViewPaymentRouteArgs> {
+/// [_i64.WebViewPaymentScreen]
+class WebViewPaymentRoute extends _i65.PageRouteInfo<WebViewPaymentRouteArgs> {
   WebViewPaymentRoute({
-    _i69.Key? key,
+    _i70.Key? key,
     required String url,
-    _i71.InAppWebViewSettings? webViewSettings,
-    List<_i64.PageRouteInfo>? children,
+    _i72.InAppWebViewSettings? webViewSettings,
+    List<_i65.PageRouteInfo>? children,
   }) : super(
          WebViewPaymentRoute.name,
          args: WebViewPaymentRouteArgs(
@@ -2832,12 +2888,12 @@ class WebViewPaymentRoute extends _i64.PageRouteInfo<WebViewPaymentRouteArgs> {
 
   static const String name = 'WebViewPaymentRoute';
 
-  static _i64.PageInfo page = _i64.PageInfo(
+  static _i65.PageInfo page = _i65.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<WebViewPaymentRouteArgs>();
-      return _i64.WrappedRoute(
-        child: _i63.WebViewPaymentScreen(
+      return _i65.WrappedRoute(
+        child: _i64.WebViewPaymentScreen(
           key: args.key,
           url: args.url,
           webViewSettings: args.webViewSettings,
@@ -2854,11 +2910,11 @@ class WebViewPaymentRouteArgs {
     this.webViewSettings,
   });
 
-  final _i69.Key? key;
+  final _i70.Key? key;
 
   final String url;
 
-  final _i71.InAppWebViewSettings? webViewSettings;
+  final _i72.InAppWebViewSettings? webViewSettings;
 
   @override
   String toString() {

@@ -38,6 +38,7 @@ const releaseAppEnvironment = AppEnvironment(
   qrEndpoint: '$kProdBackend/qr',
   websiteUrl: 'https://coffeelil.by',
   knowledgeBaseUrl: 'https://lilcoffee.by/baza356735256lil',
+  partnerApiUrl: '$kProdBackend/api/v1/',
 );
 
 const testAppEnvironment = AppEnvironment(
@@ -75,4 +76,5 @@ const testAppEnvironment = AppEnvironment(
   qrEndpoint: '$kLocalBackend/qr',
   websiteUrl: 'https://lilcoffee.by',
   knowledgeBaseUrl: '$kLocalBackend/knowledge-base/',
+  partnerApiUrl: '$kLocalBackend/api/v1/',
 );

@@ -99,6 +99,11 @@ class DivisionDetailsScreen extends StatelessWidget implements AutoRouteWrapper 
                 unitId: unitId,
               ),
             ),
+          ShowFridgeStockScreenSr(:final unitId) => context.router.push(
+              FridgeStockRoute(
+                deviceId: unitId,
+              ),
+            ),
         },
         buildWhen: (previous, current) => previous.status != current.status,
         builder: (context, state) {
@@ -823,6 +828,16 @@ class DivisionActions extends StatelessWidget {
 
   List<Widget> _getActionsForFridge(BuildContext context) {
     return [
+      TextButton(
+        onPressed: () => context
+            .read<DivisionDetailsCubit>()
+            .onFridgeStockPressed(unitId: divisionUnit.unitId),
+        child: const Text(
+          'Склад холодильника',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
       TextButton(
         onPressed: () => context
             .read<DivisionDetailsCubit>()

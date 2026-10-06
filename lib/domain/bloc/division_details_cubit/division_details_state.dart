@@ -36,6 +36,10 @@ sealed class DivisionDetailsSr with _$DivisionDetailsSr {
   const factory DivisionDetailsSr.showTempScreen({
     required String unitId,
   }) = ShowTempScreenSr;
+
+  const factory DivisionDetailsSr.showFridgeStockScreen({
+    required String unitId,
+  }) = ShowFridgeStockScreenSr;
 }
 
 enum DivisionDetailsStatus {

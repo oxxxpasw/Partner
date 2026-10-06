@@ -409,7 +409,7 @@ extension DivisionDetailsSrPatterns on DivisionDetailsSr {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( DivisionDetailsErrorSr value)?  error,TResult Function( CreateDivisionDocumentSr value)?  createDivisionDocument,TResult Function( ShowReportScreenSr value)?  showReportScreen,TResult Function( ShowEventsScreenSr value)?  showEventsScreen,TResult Function( ShowTempScreenSr value)?  showTempScreen,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( DivisionDetailsErrorSr value)?  error,TResult Function( CreateDivisionDocumentSr value)?  createDivisionDocument,TResult Function( ShowReportScreenSr value)?  showReportScreen,TResult Function( ShowEventsScreenSr value)?  showEventsScreen,TResult Function( ShowTempScreenSr value)?  showTempScreen,TResult Function( ShowFridgeStockScreenSr value)?  showFridgeStockScreen,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case DivisionDetailsErrorSr() when error != null:
@@ -417,7 +417,8 @@ return error(_that);case CreateDivisionDocumentSr() when createDivisionDocument 
 return createDivisionDocument(_that);case ShowReportScreenSr() when showReportScreen != null:
 return showReportScreen(_that);case ShowEventsScreenSr() when showEventsScreen != null:
 return showEventsScreen(_that);case ShowTempScreenSr() when showTempScreen != null:
-return showTempScreen(_that);case _:
+return showTempScreen(_that);case ShowFridgeStockScreenSr() when showFridgeStockScreen != null:
+return showFridgeStockScreen(_that);case _:
   return orElse();
 
 }
@@ -435,7 +436,7 @@ return showTempScreen(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( DivisionDetailsErrorSr value)  error,required TResult Function( CreateDivisionDocumentSr value)  createDivisionDocument,required TResult Function( ShowReportScreenSr value)  showReportScreen,required TResult Function( ShowEventsScreenSr value)  showEventsScreen,required TResult Function( ShowTempScreenSr value)  showTempScreen,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( DivisionDetailsErrorSr value)  error,required TResult Function( CreateDivisionDocumentSr value)  createDivisionDocument,required TResult Function( ShowReportScreenSr value)  showReportScreen,required TResult Function( ShowEventsScreenSr value)  showEventsScreen,required TResult Function( ShowTempScreenSr value)  showTempScreen,required TResult Function( ShowFridgeStockScreenSr value)  showFridgeStockScreen,}){
 final _that = this;
 switch (_that) {
 case DivisionDetailsErrorSr():
@@ -443,7 +444,8 @@ return error(_that);case CreateDivisionDocumentSr():
 return createDivisionDocument(_that);case ShowReportScreenSr():
 return showReportScreen(_that);case ShowEventsScreenSr():
 return showEventsScreen(_that);case ShowTempScreenSr():
-return showTempScreen(_that);}
+return showTempScreen(_that);case ShowFridgeStockScreenSr():
+return showFridgeStockScreen(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -457,7 +459,7 @@ return showTempScreen(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( DivisionDetailsErrorSr value)?  error,TResult? Function( CreateDivisionDocumentSr value)?  createDivisionDocument,TResult? Function( ShowReportScreenSr value)?  showReportScreen,TResult? Function( ShowEventsScreenSr value)?  showEventsScreen,TResult? Function( ShowTempScreenSr value)?  showTempScreen,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( DivisionDetailsErrorSr value)?  error,TResult? Function( CreateDivisionDocumentSr value)?  createDivisionDocument,TResult? Function( ShowReportScreenSr value)?  showReportScreen,TResult? Function( ShowEventsScreenSr value)?  showEventsScreen,TResult? Function( ShowTempScreenSr value)?  showTempScreen,TResult? Function( ShowFridgeStockScreenSr value)?  showFridgeStockScreen,}){
 final _that = this;
 switch (_that) {
 case DivisionDetailsErrorSr() when error != null:
@@ -465,7 +467,8 @@ return error(_that);case CreateDivisionDocumentSr() when createDivisionDocument 
 return createDivisionDocument(_that);case ShowReportScreenSr() when showReportScreen != null:
 return showReportScreen(_that);case ShowEventsScreenSr() when showEventsScreen != null:
 return showEventsScreen(_that);case ShowTempScreenSr() when showTempScreen != null:
-return showTempScreen(_that);case _:
+return showTempScreen(_that);case ShowFridgeStockScreenSr() when showFridgeStockScreen != null:
+return showFridgeStockScreen(_that);case _:
   return null;
 
 }
@@ -482,14 +485,15 @@ return showTempScreen(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String message)?  error,TResult Function( Store store,  OrderCreationType type,  String unitId)?  createDivisionDocument,TResult Function( String id,  String unitId)?  showReportScreen,TResult Function( String unitId)?  showEventsScreen,TResult Function( String unitId)?  showTempScreen,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String message)?  error,TResult Function( Store store,  OrderCreationType type,  String unitId)?  createDivisionDocument,TResult Function( String id,  String unitId)?  showReportScreen,TResult Function( String unitId)?  showEventsScreen,TResult Function( String unitId)?  showTempScreen,TResult Function( String unitId)?  showFridgeStockScreen,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case DivisionDetailsErrorSr() when error != null:
 return error(_that.message);case CreateDivisionDocumentSr() when createDivisionDocument != null:
 return createDivisionDocument(_that.store,_that.type,_that.unitId);case ShowReportScreenSr() when showReportScreen != null:
 return showReportScreen(_that.id,_that.unitId);case ShowEventsScreenSr() when showEventsScreen != null:
 return showEventsScreen(_that.unitId);case ShowTempScreenSr() when showTempScreen != null:
-return showTempScreen(_that.unitId);case _:
+return showTempScreen(_that.unitId);case ShowFridgeStockScreenSr() when showFridgeStockScreen != null:
+return showFridgeStockScreen(_that.unitId);case _:
   return orElse();
 
 }
@@ -507,14 +511,15 @@ return showTempScreen(_that.unitId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String message)  error,required TResult Function( Store store,  OrderCreationType type,  String unitId)  createDivisionDocument,required TResult Function( String id,  String unitId)  showReportScreen,required TResult Function( String unitId)  showEventsScreen,required TResult Function( String unitId)  showTempScreen,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String message)  error,required TResult Function( Store store,  OrderCreationType type,  String unitId)  createDivisionDocument,required TResult Function( String id,  String unitId)  showReportScreen,required TResult Function( String unitId)  showEventsScreen,required TResult Function( String unitId)  showTempScreen,required TResult Function( String unitId)  showFridgeStockScreen,}) {final _that = this;
 switch (_that) {
 case DivisionDetailsErrorSr():
 return error(_that.message);case CreateDivisionDocumentSr():
 return createDivisionDocument(_that.store,_that.type,_that.unitId);case ShowReportScreenSr():
 return showReportScreen(_that.id,_that.unitId);case ShowEventsScreenSr():
 return showEventsScreen(_that.unitId);case ShowTempScreenSr():
-return showTempScreen(_that.unitId);}
+return showTempScreen(_that.unitId);case ShowFridgeStockScreenSr():
+return showFridgeStockScreen(_that.unitId);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -528,14 +533,15 @@ return showTempScreen(_that.unitId);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String message)?  error,TResult? Function( Store store,  OrderCreationType type,  String unitId)?  createDivisionDocument,TResult? Function( String id,  String unitId)?  showReportScreen,TResult? Function( String unitId)?  showEventsScreen,TResult? Function( String unitId)?  showTempScreen,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String message)?  error,TResult? Function( Store store,  OrderCreationType type,  String unitId)?  createDivisionDocument,TResult? Function( String id,  String unitId)?  showReportScreen,TResult? Function( String unitId)?  showEventsScreen,TResult? Function( String unitId)?  showTempScreen,TResult? Function( String unitId)?  showFridgeStockScreen,}) {final _that = this;
 switch (_that) {
 case DivisionDetailsErrorSr() when error != null:
 return error(_that.message);case CreateDivisionDocumentSr() when createDivisionDocument != null:
 return createDivisionDocument(_that.store,_that.type,_that.unitId);case ShowReportScreenSr() when showReportScreen != null:
 return showReportScreen(_that.id,_that.unitId);case ShowEventsScreenSr() when showEventsScreen != null:
 return showEventsScreen(_that.unitId);case ShowTempScreenSr() when showTempScreen != null:
-return showTempScreen(_that.unitId);case _:
+return showTempScreen(_that.unitId);case ShowFridgeStockScreenSr() when showFridgeStockScreen != null:
+return showFridgeStockScreen(_that.unitId);case _:
   return null;
 
 }
@@ -880,6 +886,72 @@ class _$ShowTempScreenSrCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? unitId = null,}) {
   return _then(ShowTempScreenSr(
+unitId: null == unitId ? _self.unitId : unitId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ShowFridgeStockScreenSr implements DivisionDetailsSr {
+  const ShowFridgeStockScreenSr({required this.unitId});
+  
+
+ final  String unitId;
+
+/// Create a copy of DivisionDetailsSr
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ShowFridgeStockScreenSrCopyWith<ShowFridgeStockScreenSr> get copyWith => _$ShowFridgeStockScreenSrCopyWithImpl<ShowFridgeStockScreenSr>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ShowFridgeStockScreenSr&&(identical(other.unitId, unitId) || other.unitId == unitId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,unitId);
+
+@override
+String toString() {
+  return 'DivisionDetailsSr.showFridgeStockScreen(unitId: $unitId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ShowFridgeStockScreenSrCopyWith<$Res> implements $DivisionDetailsSrCopyWith<$Res> {
+  factory $ShowFridgeStockScreenSrCopyWith(ShowFridgeStockScreenSr value, $Res Function(ShowFridgeStockScreenSr) _then) = _$ShowFridgeStockScreenSrCopyWithImpl;
+@useResult
+$Res call({
+ String unitId
+});
+
+
+
+
+}
+/// @nodoc
+class _$ShowFridgeStockScreenSrCopyWithImpl<$Res>
+    implements $ShowFridgeStockScreenSrCopyWith<$Res> {
+  _$ShowFridgeStockScreenSrCopyWithImpl(this._self, this._then);
+
+  final ShowFridgeStockScreenSr _self;
+  final $Res Function(ShowFridgeStockScreenSr) _then;
+
+/// Create a copy of DivisionDetailsSr
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? unitId = null,}) {
+  return _then(ShowFridgeStockScreenSr(
 unitId: null == unitId ? _self.unitId : unitId // ignore: cast_nullable_to_non_nullable
 as String,
   ));

@@ -85,6 +85,11 @@ abstract class DioClientModule {
   Dio makeDioFileDownloaderClient(DioClientCreator dioClientCreator) =>
       dioClientCreator.makeFileDownloaderClient();
 
+  @Named(InjectableNames.partnerApiClient)
+  @singleton
+  Dio makeDioPartnerApiClient(DioClientCreator dioClientCreator) =>
+      dioClientCreator.makePartnerApiClient();
+
   @Named(InjectableNames.api1cClient)
   @lazySingleton
   Dio makeDio1cClient(DioClientCreator dioClientCreator) =>

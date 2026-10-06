@@ -28,6 +28,8 @@ abstract class DioClientCreator {
   Dio makeFileDownloaderClient();
 
   Dio make1cClient();
+
+  Dio makePartnerApiClient();
 }
 
 class DioClientCreatorImpl implements DioClientCreator {
@@ -68,6 +70,9 @@ class DioClientCreatorImpl implements DioClientCreator {
 
   @override
   Dio make1cClient() => _baseDio(appEnvironment.api1cEndpoint);
+
+  @override
+  Dio makePartnerApiClient() => _baseDio(appEnvironment.partnerApiUrl);
 
   @override
   Dio makeFileDownloaderClient() =>
@@ -121,6 +126,9 @@ class DioTestClientCreatorImpl implements DioClientCreator {
 
   @override
   Dio make1cClient() => _baseDio(appEnvironment.api1cEndpoint);
+
+  @override
+  Dio makePartnerApiClient() => _baseDio(appEnvironment.partnerApiUrl);
 
   Dio _baseDio(String url) {
     final startDio = Dio();

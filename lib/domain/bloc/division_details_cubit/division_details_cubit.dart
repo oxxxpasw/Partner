@@ -137,6 +137,10 @@ class DivisionDetailsCubit
     );
   }
 
+  void onFridgeStockPressed({required String unitId}) {
+    addSr(DivisionDetailsSr.showFridgeStockScreen(unitId: unitId));
+  }
+
   void onGenQrPressed({
     required DivisionUnit unit,
   }) async {

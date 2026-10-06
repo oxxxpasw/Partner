@@ -397,6 +397,12 @@ class AppRouter extends RootStackRouter {
         ),
 
         AdaptiveRoute(
+          path: '/fridge-stock/:deviceId',
+          page: FridgeStockRoute.page,
+          guards: [initGuard, authGuard],
+        ),
+
+        AdaptiveRoute(
           path: '/knowledge-base',
           page: KnowledgeBaseWebviewRoute.page,
           fullscreenDialog: true,

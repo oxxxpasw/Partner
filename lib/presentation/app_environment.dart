@@ -34,6 +34,7 @@ abstract class AppEnvironment with _$AppEnvironment {
     required String qrEndpoint,
     required String websiteUrl,
     required String knowledgeBaseUrl,
+    required String partnerApiUrl,
   }) = _AppEnvironment;
 
   factory AppEnvironment.fromJson(Map<String, dynamic> json) =>

@@ -9,4 +9,5 @@ class InjectableNames {
   static const fridgeApiClient = 'fridgeApiClient';
   static const fileDownloaderClient = 'networkFileDownloaderClient';
   static const api1cClient = 'api1cClient';
+  static const partnerApiClient = 'partnerApiClient';
 }
