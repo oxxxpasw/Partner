@@ -71,28 +71,50 @@ class FridgeStockScreen extends StatelessWidget implements AutoRouteWrapper {
       backgroundColor: Colors.black,
       builder: (sheetContext) => SizedBox(
         height: MediaQuery.of(sheetContext).size.height * 0.7,
-        child: Stack(
+        child: Column(
           children: [
-            QrScanner(
-              onDetect: (BarcodeCapture capture) {
-                final raw = capture.barcodes.firstOrNull;
-                if (raw == null || raw.rawValue == null) return;
-                if (raw.format == BarcodeFormat.qrCode) return;
-                Navigator.of(sheetContext).pop();
-                context
-                    .read<FridgeStockCubit>()
-                    .acceptBarcode(raw.rawValue!, quantity: 1);
-              },
+            Expanded(
+              child: Stack(
+                children: [
+                  QrScanner(
+                    onDetect: (BarcodeCapture capture) {
+                      final raw = capture.barcodes.firstOrNull;
+                      if (raw == null || raw.rawValue == null) return;
+                      if (raw.format == BarcodeFormat.qrCode) return;
+                      Navigator.of(sheetContext).pop();
+                      context
+                          .read<FridgeStockCubit>()
+                          .acceptBarcode(raw.rawValue!, quantity: 1);
+                    },
+                  ),
+                  SafeArea(
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: IconButton(
+                          color: Colors.white,
+                          onPressed: () => Navigator.of(sheetContext).pop(),
+                          icon: const Icon(Icons.close),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             SafeArea(
-              child: Align(
-                alignment: Alignment.topRight,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: IconButton(
-                    color: Colors.white,
-                    onPressed: () => Navigator.of(sheetContext).pop(),
-                    icon: const Icon(Icons.close),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+                child: TextButton.icon(
+                  onPressed: () {
+                    Navigator.of(sheetContext).pop();
+                    _showManualBarcodeDialog(context);
+                  },
+                  icon: const Icon(Icons.keyboard, color: Colors.white),
+                  label: const Text(
+                    'Ввести штрихкод вручную',
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -101,6 +123,58 @@ class FridgeStockScreen extends StatelessWidget implements AutoRouteWrapper {
         ),
       ),
     );
+  }
+
+  /// Ручной ввод штрихкода без скана: если товар не найден —
+  /// кубит сам попросит заполнить карточку нового товара.
+  void _showManualBarcodeDialog(BuildContext context) {
+    final barcodeController = TextEditingController();
+
+    showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Приём по штрихкоду'),
+        content: TextField(
+          controller: barcodeController,
+          autofocus: true,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+            labelText: 'Штрихкод (EAN/GTIN)',
+            border: OutlineInputBorder(),
+          ),
+          onSubmitted: (_) => _submitManualBarcode(
+            context,
+            dialogContext,
+            barcodeController.text,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: const Text('Отмена'),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: const Color(0xFF194F2F),
+            ),
+            onPressed: () => _submitManualBarcode(
+              context,
+              dialogContext,
+              barcodeController.text,
+            ),
+            child: const Text('Принять'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _submitManualBarcode(BuildContext context, BuildContext dialogContext,
+      String barcode) {
+    final code = barcode.trim();
+    if (code.isEmpty) return;
+    Navigator.of(dialogContext).pop();
+    context.read<FridgeStockCubit>().acceptBarcode(code, quantity: 1);
   }
 
   void _showNewProductDialog(BuildContext context, String barcode) {
