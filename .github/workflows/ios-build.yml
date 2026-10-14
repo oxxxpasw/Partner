@@ -3,27 +3,27 @@ name: iOS (apprelease) → TestFlight
 on:
   push:
     branches:
-      - main # Сборка будет запускаться автоматически при пуше в ветку main
-  workflow_dispatch: # Позволяет запускать сборку вручную кнопкой во вкладке Actions на GitHub
+      - main
+  workflow_dispatch:
 
 jobs:
   ios-appstore:
     name: Build & Release iOS
-    runs-on: macos-latest # Для сборки iOS нужна виртуальная машина macOS
+    runs-on: macos-latest
 
     steps:
-      # 1. Скачиваем код из вашего GitHub-репозитория
+      # 1. Скачиваем код (Обновлено до v4)
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Устанавливаем Java (требуется для инструментов сборки)
+      # 2. Устанавливаем Java (Обновлено до v5, чтобы убрать warning)
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
           java-version: '17'
 
-      # 3. Устанавливаем конкретную версию Flutter из вашего ТЗ
+      # 3. Устанавливаем Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -31,7 +31,7 @@ jobs:
           channel: 'stable'
           cache: true
 
-      # 4. Скачиваем зависимости Flutter
+      # 4. Скачиваем зависимости
       - name: Get Flutter dependencies
         run: flutter pub get
 
@@ -41,18 +41,16 @@ jobs:
           cd ios
           pod install --repo-update
 
-      # 6. Настраиваем авторизацию Apple API для автоматической подписи
+      # 6. Настраиваем ключи авторизации Apple
       - name: Set up iOS code signing certificates
         env:
           KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
           ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
         run: |
-          # Создаем системную папку для ключа авторизации Xcode
           mkdir -p ~/.appstoreconnect/private_keys
           echo "$KEY_CONTENT" > ~/.appstoreconnect/private_keys/AuthKey_$KEY_ID.p8
           
-          # Создаем временную защищенную связку ключей на Mac
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
           KEYCHAIN_PASSWORD="temporary_password"
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
@@ -60,7 +58,7 @@ jobs:
           security default-keychain -s $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
-      # 7. Компилируем проект в .ipa, передавая флаг авто-подписи напрямую в Xcode
+      # 7. Сборка проекта (Флаги Xcode передаются через --dart-define или переменные окружения, чтобы избежать ошибки 64)
       - name: Build IPA (apprelease)
         env:
           XCODE_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
@@ -70,16 +68,13 @@ jobs:
             --flavor apprelease \
             --build-name=1.1.329 \
             --build-number=329 \
-            --export-method app-store \
-            --xcconfig-flags="ALLOW_PROVISIONING_UPDATES=YES"
+            --export-method app-store
 
-      # 8. Загружаем готовое приложение в TestFlight / App Store Connect
+      # 8. Загрузка в TestFlight через нативный xcrun altool
       - name: Upload to App Store Connect
         run: |
-          # Ищем скомпилированный файл .ipa в папке сборки
           IPA_PATH=$(find build/ios/ipa -name "*.ipa" | head -n 1)
           
-          # Отправляем файл напрямую в Apple через стандартную утилиту xcrun
           xcrun altool --upload-app \
             --type ios \
             --file "$IPA_PATH" \
