@@ -1,82 +1,65 @@
-name: iOS (apprelease) → TestFlight
+# Конфигурация Codemagic для SosediFedi Partner
+# Flutter 3.47.1, флейвор apprelease, автоматическая подпись и публикация в Релиз App Store
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
-
-jobs:
+workflows:
   ios-appstore:
-    name: Build & Release iOS
-    runs-on: macos-latest
+    name: iOS (apprelease) → App Store Release
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      flutter: 3.47.1
+      xcode: latest
+      cocoapods: default
+      groups:
+        - APPLE_CREDS # Группа секретов в панели Codemagic (Issuer ID, Key ID, .p8)
+      vars:
+        FLAVOR: apprelease
+        BUNDLE_ID: com.lilcoffee.sell
 
-    steps:
-      # 1. Скачиваем код (Обновлено до v4)
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    scripts:
+      - name: Set up iOS code signing
+        script: |
+          # Автоматически генерируем сертификат и профиль распределения App Store
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+          
+          # Инициализируем связку ключей на виртуальном Mac
+          platform-utils keychain initialize
+          platform-utils keychain add-certificates
 
-      # 2. Устанавливаем Java (Обновлено до v5, чтобы убрать warning)
-      - name: Setup Java
-        uses: actions/setup-java@v5
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      # 3. Устанавливаем Flutter
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.47.1'
-          channel: 'stable'
-          cache: true
-
-      # 4. Скачиваем зависимости
       - name: Get Flutter dependencies
-        run: flutter pub get
+        script: |
+          flutter pub get
 
-      # 5. Устанавливаем CocoaPods
       - name: CocoaPods install
-        run: |
+        script: |
           cd ios
           pod install --repo-update
 
-      # 6. Настраиваем ключи авторизации Apple
-      - name: Set up iOS code signing certificates
-        env:
-          KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
-          ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-          KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/.appstoreconnect/private_keys
-          echo "$KEY_CONTENT" > ~/.appstoreconnect/private_keys/AuthKey_$KEY_ID.p8
-          
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-          KEYCHAIN_PASSWORD="temporary_password"
-          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
-          security default-keychain -s $KEYCHAIN_PATH
-          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
-
-      # 7. Сборка проекта (Флаги Xcode передаются через --dart-define или переменные окружения, чтобы избежать ошибки 64)
       - name: Build IPA (apprelease)
-        env:
-          XCODE_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
-          XCODE_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
-        run: |
+        script: |
+          set -e
+          # Собираем релизный .ipa
           flutter build ipa --release \
-            --flavor apprelease \
+            --flavor $FLAVOR \
             --build-name=1.1.329 \
             --build-number=329 \
-            --export-method app-store
+            --export-options-plist=$HOME/export_options.plist
 
-      # 8. Загрузка в TestFlight через нативный xcrun altool
-      - name: Upload to App Store Connect
-        run: |
-          IPA_PATH=$(find build/ios/ipa -name "*.ipa" | head -n 1)
-          
-          xcrun altool --upload-app \
-            --type ios \
-            --file "$IPA_PATH" \
-            --apiKey "${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}" \
-            --apiIssuer "${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}"
+    artifacts:
+      - build/ios/ipa/*.ipa
+
+    # 👇 НАСТРОЙКА АВТОМАТИЧЕСКОГО РЕЛИЗА В APP STORE
+    publishing:
+      email:
+        recipients:
+          - you@example.com # Укажите ваш email для уведомлений
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: false # 👈 Отключаем TestFlight
+        submit_to_app_store: true   # 👈 Включаем прямую отправку в App Store на модерацию
+        
+        # Выберите стратегию релиза после прохождения модерации (выберите ОДИН из вариантов ниже):
+        # MANUAL — вы сами зайдете и нажмете кнопку "Выпустить", когда Apple одобрит приложение
+        # AUTOMATIC — приложение опубликуется в магазине САМО сразу после одобрения
+        # SCHEDULED — публикация в заданное время
+        release_type: MANUAL 
