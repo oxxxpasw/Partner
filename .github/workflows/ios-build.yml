@@ -1,75 +1,60 @@
-# Codemagic.yaml — сборка iOS (только iOS) для SosediFedi Partner
-# Flutter 3.47.1, флейвор aprelease, подпись через App Store Connect API key,
-# публикация в TestFlight. Положи в корень репо (D:\coffelilactual\Partner\codemagic.yaml).
- 
+# Codemagic configuration for SosediFedi Partner
+# Flutter 3.47.1, флейвор aprelease, автоматическая подпись и релиз в TestFlight
+
 workflows:
   ios-appstore:
     name: iOS (apprelease) → TestFlight
     max_build_duration: 60
     instance_type: mac_mini_m2
     environment:
-      flutter: stable           # проект на 3.47.1; если хочешь прибить версию — укажи точную в Codemagic (Flutter versions) или git_ref
+      flutter: 3.47.1 # Жестко фиксируем версию Flutter, как указано в вашем ТЗ
       xcode: latest
       cocoapods: default
       groups:
-        # группа APPLE_CREDS в настроffikах (Settings → Groups) или прямо в vars:
-        - APPLE_CREDS
+        - APPLE_CREDS # Убедитесь, что в UI Codemagic создана группа с этим именем
       vars:
-        FLAVOR: apprelease          # aprelease (прод) | apptest (тест)
+        FLAVOR: apprelease
         BUNDLE_ID: com.lilcoffee.sell
-        TEAM_ID: SKD9XFX3L6
-        # App Store Connect API key (ключ создан в ASC, Key ID у тебя: 3d30b5f7-...; .p8 cкачняется один раз в Codemagic App settings → App Store Connect API key)
-        # APP_STORE_CONNECT_ISSUER_ID и KEY_ID задавать в группах/UI, в yaml они через переменные ниже
+        
     scripts:
-      - name: Setup Flutter
+      - name: Set up iOS code signing
+        script: |
+          # 1. Автоматически запрашиваем и генерируем сертификаты/профили у Apple
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+          
+          # 2. Инициализируем Keychain на виртуальном Mac для хранения этих сертификатов
+          platform-utils keychain initialize
+          platform-utils keychain add-certificates
+
+      - name: Get Flutter dependencies
         script: |
           flutter pub get
+
       - name: CocoaPods install
         script: |
           cd ios
           pod install --repo-update
-      - name: Build IPA (apprelease, app-store-connect)
+
+      - name: Build IPA (apprelease)
         script: |
           set -e
+          # Генерируем exportOptions.plist автоматически в домашнюю директорию, 
+          # чтобы не тащить локальный файл из вашей папки D:\...
           flutter build ipa --release \
             --flavor $FLAVOR \
-            --export-options-plist=scripts/ios/exportOptions_app-store-connect.plist \
-            --build-name=1.1.329 --build-number=329
+            --build-name=1.1.329 \
+            --build-number=329 \
+            --export-options-plist=$HOME/export_options.plist
+
     artifacts:
       - build/ios/ipa/*.ipa
+
     publishing:
       email:
         recipients:
-          - you@example.com   # заменить на свой e-mail
+          - you@example.com # 👈 Укажите свой реальный e-mail для уведомлений
       app_store_connect:
-        # в Codemagic App settings → "App Store Connect API key" добавь ключ
-        # (Issuer ID + .p8 + Key ID 3d30b5f7-67f1-4561-b74b-cf57b0124adc) и укажи его имя ниже.
-        api_key: APP_STORE_CONNECT_KEY
+        auth: integration # Использует системную интеграцию через переменные окружения
         submit_to_testflight: true
         beta_groups:
-          - SosediFedi-Инвесторы   # при желании группа TestFlight
-        # distribution: app-store  # раскомментировать, если сразу в App Store (надо upload + release)
- 
-  ios-adhoc:
-    name: iOS (apprelease) ad-hoc / артефакт
-    max_build_duration: 60
-    instance_type: mac_mini_m2
-    environment:
-      flutter: stable
-      xcode: latest
-      cocoapods: default
-      vars:
-        FLAVOR: apprelease
-    scripts:
-      - name: Setup + deps
-        script: |
-          flutter pub get
-          cd ios && pod install --repo-update
-      - name: Build IPA (ad-hoc)
-        script: |
-          set -e
-          flutter build ipa --release --no-codesign \
-            --flavor $FLAVOR
-    artifacts:
-      - build/ios/ipa/*.ipa
- 
+          - SosediFedi-Инвесторы
