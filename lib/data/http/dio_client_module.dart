@@ -250,6 +250,24 @@ abstract class DioClientModule {
         },
       );
 
+  @Named(InjectableNames.partnerApiClient)
+  @lazySingleton
+  DioErrorHandler<DefaultApiError> makeDioPartnerErrorHandler() =>
+      DioErrorHandlerImpl<DefaultApiError>(
+        connectivity: Connectivity(),
+        parseJsonApiError: (json) async {
+          // /api/v1 — FastAPI: ошибки приходят в поле «detail».
+          final detail = json?['detail'];
+          if (detail != null) {
+            return DefaultApiError(
+              code: '999',
+              msg: detail is String ? detail : detail.toString(),
+            );
+          }
+          return null;
+        },
+      );
+
   @testEnv
   @Named(InjectableNames.authServiceClient)
   @lazySingleton

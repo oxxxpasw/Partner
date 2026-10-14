@@ -18,7 +18,10 @@ abstract class QrGenService {
 
 @Singleton(as: QrGenService)
 class QrGenServiceImpl implements QrGenService {
-  QrGenServiceImpl({Dio? dio}) : _dio = dio ?? Dio();
+  // Dio здесь без инжекции: injectable_generator резолвил опциональный
+  // параметр в безымянный Dio, которого нет в графе, — и $initGetIt падал
+  // на старте ("Dio is not registered"), оставляя нативный сплеш навсегда.
+  QrGenServiceImpl() : _dio = Dio();
 
   final Dio _dio;
 

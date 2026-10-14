@@ -39,10 +39,18 @@ class SplashBloc extends SrCubit<SplashState, SplashSr> {
 
   Future<void> init() async {
     try {
+      // ignore: avoid_print
+      print('[SPLASH-DIAG] init() started');
       emit(const SplashState.loading());
       final deepLink = await getInitialDeepLink();
+      // ignore: avoid_print
+      print('[SPLASH-DIAG] deepLink=$deepLink');
       analystService.appOpen(deeplink: deepLink);
+      // ignore: avoid_print
+      print('[SPLASH-DIAG] appOpen sent, calling initialize()');
       final response = await startupInteractor.initialize();
+      // ignore: avoid_print
+      print('[SPLASH-DIAG] initialize done, hasError=${response.hasError}');
       if (response.hasError) {
         addSr(
           SplashSr.error(ErrorMessages.getMessage(response.error)),

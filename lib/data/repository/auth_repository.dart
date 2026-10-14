@@ -131,10 +131,18 @@ class AuthRepository {
       }
 
       final futures = [
-        authService.getUser(
-          token: token,
-        ),
-        authService.getUserInfo(token: token),
+        authService
+            .getUser(token: token)
+            .timeout(const Duration(seconds: 15), onTimeout: () {
+          return ApiResponse.error(
+              const CommonResponseError.undefinedError('getUser timeout'));
+        }),
+        authService
+            .getUserInfo(token: token)
+            .timeout(const Duration(seconds: 15), onTimeout: () {
+          return ApiResponse.error(
+              const CommonResponseError.undefinedError('getUserInfo timeout'));
+        }),
       ];
 
       final result = await Future.wait(futures);
@@ -230,7 +238,16 @@ class AuthRepository {
   ///Инициализация репозитория авторизации
   Future<void> init() async {
     try {
-      final fireBaseResponse = await PushNotificationService.initialise();
+      final fireBaseResponse = await PushNotificationService.initialise()
+          .timeout(
+        const Duration(seconds: 25),
+        onTimeout: () {
+          analystService
+              .error('PushNotificationService.initialise() timed out after 25s');
+          return const ApiResponse.error(
+              CommonResponseError.undefinedError('push init timeout'));
+        },
+      );
       if (fireBaseResponse.hasError) {
         analystService.error(fireBaseResponse.error.toString());
       }

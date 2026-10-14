@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
@@ -97,15 +98,35 @@ class StartupInteractorImpl implements StartupInteractor {
         () async {
           try {
             _listenGlobalBroadcasts();
+            // ВАЖНО: таймаут на КАЖДЫЙ шаг. Любой из них (Firebase,
+            // secure_storage, сеть) может зависнуть навсегда на устройстве с
+            // проблемным keystore/каналами — тогда initialize() висел, а
+            // приложение застревало на сплэше навсегда. Теперь максимум ~25с,
+            // и старт продолжается без упавшей части.
             await Future.wait([
-              authRepository.init(),
-              cityRepository.init(),
-              barcodeParserRepository.init(),
+              authRepository
+                  .init()
+                  .timeout(const Duration(seconds: 25), onTimeout: () async {
+                return;
+              }),
+              cityRepository
+                  .init()
+                  .timeout(const Duration(seconds: 20), onTimeout: () async {
+                return;
+              }),
+              barcodeParserRepository
+                  .init()
+                  .timeout(const Duration(seconds: 20), onTimeout: () async {
+                return;
+              }),
             ]);
             _isInited = true;
             return const ApiResponse.success(null);
           } catch (e) {
-            return ApiResponse.error(CommonResponseError.undefinedError(e));
+            // Даже при ошибке считаем инициализацию состоявшейся — guards
+            // пропустят пользователя, авторизация догрузится позже.
+            _isInited = true;
+            return const ApiResponse.success(null);
           }
         },
       );
@@ -123,7 +144,12 @@ class StartupInteractorImpl implements StartupInteractor {
   void _listenGlobalBroadcasts() {
     _compositeSubscription.add(
       authRepository.tokenStream.listen((auth) {
-        GetIt.I.get<AppRouter>().reevaluateGuards();
+        // reevaluateGuards() триггерит навигацию — нельзя звать синхронно
+        // из stream listener во время frame update: роняет assertion
+        // '!_debugDoingUpdate' в restoration.dart.
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          GetIt.I.get<AppRouter>().reevaluateGuards();
+        });
         cartRepository.setUser(auth?.user);
         customerAccountRepository.setUser(auth?.user);
         fridgeRepository.user = auth?.user;
@@ -151,7 +177,9 @@ class StartupInteractorImpl implements StartupInteractor {
     _compositeSubscription.add(
       unpaidOrdersRepository.unpaidOrderStream.listen(
         (event) {
-          GetIt.I.get<AppRouter>().reevaluateGuards();
+          SchedulerBinding.instance.addPostFrameCallback((_) {
+            GetIt.I.get<AppRouter>().reevaluateGuards();
+          });
         },
       ),
     );

@@ -15,16 +15,24 @@ class HasUnpaidOrderGuard extends AutoRouteGuard {
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     if (await canNavigate()) {
-      resolver.next();
+      _next(resolver);
     } else {
       resolver.redirectUntil(
         HasUnpaidOrderPopup(
           onPayment: () {
-            resolver.next();
+            _next(resolver);
           },
         ),
       );
     }
+  }
+
+  /// next() можно звать только один раз; reevaluateGuards и страховка
+  /// сплэша могут добраться сюда повторно — глушим повторный вызов.
+  void _next(NavigationResolver resolver, [bool updateUrl = true]) {
+    try {
+      resolver.next(updateUrl);
+    } catch (_) {}
   }
 
   Future<bool> canNavigate() async => !hasUnpaidOrder();

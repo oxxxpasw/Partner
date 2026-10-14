@@ -205,21 +205,38 @@ class AnalystServiceImpl extends AnalystService {
     AppEnvironment appEnvironment,
     OrderModelMapper orderModelMapper,
   ) async {
-    final receivePort = ReceivePort();
-    final deviceInfoValue = await AnalystService.deviceInfo();
-    await Isolate.spawn(
-      _sendEvents,
-      (
-        port: receivePort.sendPort,
-        deviceInfo: deviceInfoValue,
-        analystEndpoint: appEnvironment.analystEndpoint
-      ),
-    );
+    // ВАЖНО: этот метод @preResolve — падение здесь роняет весь
+    // configureDependencies, runApp не вызывается и приложение навсегда
+    // остаётся на native-сплэше (наблюдалось: GetIt 'AnalystService is not
+    // registered' в zone handler + вечный сплэш на эмуляторе/устройствах).
+    // Поэтому любые проблемы isolate/сети глотаем и отдаём Noop-сервис:
+    // аналитика не критична для запуска.
+    try {
+      final receivePort = ReceivePort();
+      final deviceInfoValue = await AnalystService.deviceInfo()
+          .timeout(const Duration(seconds: 10));
+      await Isolate.spawn(
+        _sendEvents,
+        (
+          port: receivePort.sendPort,
+          deviceInfo: deviceInfoValue,
+          analystEndpoint: appEnvironment.analystEndpoint
+        ),
+      ).timeout(const Duration(seconds: 10));
 
-    final queue = StreamQueue<dynamic>(receivePort);
-    final sendPort = await queue.next;
+      final queue = StreamQueue<dynamic>(receivePort);
+      final sendPort = await queue.next
+          .timeout(const Duration(seconds: 10));
 
-    return AnalystServiceImpl._(receivePort, queue, sendPort, orderModelMapper);
+      return AnalystServiceImpl._(
+        receivePort,
+        queue,
+        sendPort,
+        orderModelMapper,
+      );
+    } catch (_) {
+      return _NoopAnalystService(orderModelMapper);
+    }
   }
 
   AnalystServiceImpl._(
@@ -719,5 +736,28 @@ class UserInfo {
       token: token ?? this.token,
       id: id ?? this.id,
     );
+  }
+}
+
+/// Fallback-аналитика: ничего не отправляет, но не роняет запуск приложения.
+/// Покрывает весь интерфейс AnalystService через noSuchMethod.
+class _NoopAnalystService implements AnalystService {
+  _NoopAnalystService(this.orderModelMapper);
+
+  final OrderModelMapper orderModelMapper;
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) {
+    final member = invocation.memberName;
+    // Для Future-методов возвращаем завершённый Future, иначе вызывающий
+    // код, ожидающий await, получит unexpected null.
+    if (member == #addAction ||
+        member == #removeFromCart ||
+        member == #amountCartChange ||
+        member == #createOrder ||
+        member == #orderList) {
+      return Future<void>.value();
+    }
+    return null;
   }
 }

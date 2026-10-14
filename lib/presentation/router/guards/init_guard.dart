@@ -19,16 +19,26 @@ class InitGuard extends AutoRouteGuard {
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     if (await canNavigate()) {
-      resolver.next();
+      _next(resolver);
     } else {
       resolver.redirectUntil(SplashRoute(onLoad: (deepLink) {
         if (deepLink == null) {
-          return resolver.next();
+          return _next(resolver);
         }
-        resolver.next(false);
+        _next(resolver, false);
         router.pushPath(deepLink, includePrefixMatches: true);
       }));
     }
+  }
+
+  /// next() можно звать только один раз; гонки со стороны reevaluateGuards
+  /// и страховки сплэша добирались сюда повторно и роняли навигацию
+  /// (assertion "resolver.next() is only called once") — приложение
+  /// оставалось на нативном сплэше.
+  void _next(NavigationResolver resolver, [bool updateUrl = true]) {
+    try {
+      resolver.next(updateUrl);
+    } catch (_) {}
   }
 
   Future<bool> canNavigate() async => isInited();

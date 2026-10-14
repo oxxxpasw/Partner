@@ -55,7 +55,16 @@ class _StreamListenerState<T> extends State<StreamListener<T>> {
 
   void listen() {
     _streamSubs = widget.stream.listen(
-      widget.onData,
+      (event) {
+        // Доставляем событие строго после текущего frame.
+        // BehaviorSubject может синхронно выстрелить replay-событием
+        // прямо внутри didUpdateWidget (во время rebuild), и если
+        // onData триггерит навигацию — летит assertion
+        // '!_debugDoingUpdate' в restoration.dart.
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) widget.onData(event);
+        });
+      },
       onDone: widget.onDone,
       onError: widget.onError,
       cancelOnError: widget.cancelOnError,

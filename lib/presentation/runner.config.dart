@@ -217,6 +217,10 @@ Future<_i174.GetIt> $initGetIt(
     instanceName: 'geocoderClient',
   );
   gh.lazySingleton<_i678.DioErrorHandler<_i678.DefaultApiError>>(
+    () => dioClientModule.makeDioPartnerErrorHandler(),
+    instanceName: 'partnerApiClient',
+  );
+  gh.lazySingleton<_i678.DioErrorHandler<_i678.DefaultApiError>>(
     () => dioClientModule.makeDioPaymentErrorHandler(),
     instanceName: 'paymentServiceClient',
   );
@@ -229,6 +233,7 @@ Future<_i174.GetIt> $initGetIt(
     () => dioClientModule.dioClientCreator(gh<_i710.AppEnvironment>()),
     registerFor: {_releaseEnv, _debugEnv},
   );
+  gh.singleton<_i361.QrGenService>(() => _i361.QrGenServiceImpl());
   gh.singleton<_i615.LocationRepository>(() => _i615.LocationRepositoryImpl());
   gh.factoryParam<
     _i719.CupertinoThemeData,
@@ -271,9 +276,6 @@ Future<_i174.GetIt> $initGetIt(
   gh.lazySingleton<_i678.DioErrorHandler<_i678.DefaultApiError>>(
     () => dioClientModule.makeDioSbpClientHandler(),
     instanceName: 'sbpClient',
-  );
-  gh.singleton<_i361.QrGenService>(
-    () => _i361.QrGenServiceImpl(dio: gh<_i362.Dio>()),
   );
   gh.factory<_i545.WebViewPaymentBloc>(
     () => _i545.WebViewPaymentBloc(appEnvironment: gh<_i710.AppEnvironment>()),

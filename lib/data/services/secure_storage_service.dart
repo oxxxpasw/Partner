@@ -37,13 +37,22 @@ class SecureStorageServiceImpl extends SecureStorageService {
     String key,
     String? value,
   ) =>
-      _storage.write(key: key, value: value);
+      _storage
+          .write(key: key, value: value)
+          .timeout(const Duration(seconds: 10));
 
   @override
-  Future<void> delete(String key) => _storage.delete(key: key);
+  Future<void> delete(String key) =>
+      _storage.delete(key: key).timeout(const Duration(seconds: 10));
 
   @override
-  Future<String?> read(String key) => _storage.read(key: key);
+  Future<String?> read(String key) =>
+      // flutter_secure_storage может висеть навсегда на устройстве со
+      // сломанным keystore — из-за этого приложение застревало на сплэше.
+      // По таймауту считаем токена нет (пользователь просто перелогинится).
+      _storage
+          .read(key: key)
+          .timeout(const Duration(seconds: 10), onTimeout: () async => null);
 }
 
 @testEnv

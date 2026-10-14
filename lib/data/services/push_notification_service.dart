@@ -18,6 +18,9 @@ class PushNotificationService {
   static Future<DefaultResponse<String?>> initialise() async {
     try {
       _fcm = FirebaseMessaging.instance;
+      // Общий таймаут на ВЕСЬ блок: на iOS requestPermission/getToken при
+      // проблемах APNs могут не завершаться никогда, из-за чего initialize()
+      // висел и приложение застревало на сплэше навсегда.
       await _fcm
           .requestPermission(
             alert: true,
@@ -28,10 +31,10 @@ class PushNotificationService {
             provisional: false,
             sound: true,
           )
-          .timeout(const Duration(seconds: 15));
+          .timeout(const Duration(seconds: 20));
       fcmToken = await _fcm
           .getToken()
-          .timeout(const Duration(seconds: 15));
+          .timeout(const Duration(seconds: 20));
       if (kDebugMode) {
         print('fcm');
         print(fcmToken);

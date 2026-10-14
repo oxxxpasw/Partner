@@ -57,9 +57,15 @@ class Runner {
         final appEnvironment = await getEnv();
         await initializeFlutterPluginsAndDependencies(
           appEnvironment: appEnvironment,
+        ).timeout(
+          const Duration(seconds: 30),
+          onTimeout: () {
+            // ignore: avoid_print
+            print('[SPLASH-DIAG] initializeFlutterPluginsAndDependencies timed out after 30s — proceeding anyway');
+          },
         );
         Bloc.observer = CustomBlocObserver();
-        return runApp(
+        runApp(
           Builder(
             builder: (context) {
               final child = EasyLocalization(
@@ -86,9 +92,21 @@ class Runner {
             },
           ),
         );
+        // Страховка: если SplashScreen.initState не вызвал SplashControl.remove()
+        // (например, маршрутизатор пропустил SplashScreen), снимаем deferFirstFrame
+        // сами после первого кадра, иначе нативный сплеш висит вечно.
+        widgetsBinding.addPostFrameCallback((_) => SplashControl.remove());
       },
       (Object error, StackTrace stack) {
-        GetIt.I.get<AnalystService>().error('$error\n$stack');
+        // ВАЖНО: maybeGet, а не get — на ранних ошибках (до завершения
+        // configureDependencies) AnalystService ещё не зарегистрирован, и
+        // get() здесь кидал второе исключение, убивая старт приложения.
+        // ignore: avoid_print
+        print('[STARTUP-FATAL] $error\n$stack');
+        final analyst = GetIt.I.isRegistered<AnalystService>()
+            ? GetIt.I.get<AnalystService>()
+            : null;
+        analyst?.error('$error\n$stack');
       },
       zoneSpecification: const ZoneSpecification(
         print: _print,
@@ -186,8 +204,10 @@ class Runner {
       if (defaultTargetPlatform == TargetPlatform.android) {
         await FlutterDisplayMode.setHighRefreshRate();
       }
-    } catch (error, stack) {
-      GetIt.I.get<AnalystService>().error('$error\n$stack');
+    } catch (_) {
+      // Тихо игнорируем: на эмуляторах/нестандартных дисплеях
+      // setHighRefreshRate кидает, а AnalystService на этом этапе ещё
+      // не зарегистрирован — раньше это роняло запуск приложения.
     }
   }
 }

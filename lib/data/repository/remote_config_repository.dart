@@ -27,9 +27,13 @@ class RemoteConfigRepositoryImpl extends RemoteConfigRepository {
   static Future<RemoteConfigRepository> init(
     RemoteConfigService remoteConfigService,
   ) async {
+    // ignore: avoid_print
+    print('[STARTUP-DIAG] remoteConfig.init: start');
     final AppConfig config;
 
     final response = await remoteConfigService.getConfig();
+    // ignore: avoid_print
+    print('[STARTUP-DIAG] remoteConfig.init: done, hasError=${response.hasError}');
 
     if (response.hasError) {
       config = const AppConfig();
