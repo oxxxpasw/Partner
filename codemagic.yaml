@@ -1,0 +1,57 @@
+# Конфигурация Codemagic для SosediFedi Partner
+# Flutter 3.47.1, флейвор apprelease, автоматическая подпись и релиз в TestFlight
+
+workflows:
+  ios-appstore:
+    name: iOS (apprelease) → TestFlight
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      flutter: 3.47.1 # Фиксируем точную версию из вашего ТЗ
+      xcode: latest
+      cocoapods: default
+      groups:
+        - APPLE_CREDS # Сюда Codemagic подставит ключи App Store Connect
+      vars:
+        FLAVOR: apprelease
+        BUNDLE_ID: com.lilcoffee.sell
+
+    scripts:
+      - name: Set up iOS code signing
+        script: |
+          # Codemagic сам идет в Apple Developer Portal, генерирует сертификаты 
+          # и скачивает профили. Локальные файлы .p12 и .mobileprovision не нужны!
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+          
+          # Настраиваем внутреннюю связку ключей на Mac
+          platform-utils keychain initialize
+          platform-utils keychain add-certificates
+
+      - name: Get Flutter dependencies
+        script: |
+          flutter pub get
+
+      - name: CocoaPods install
+        script: |
+          cd ios
+          pod install --repo-update
+
+      - name: Build IPA (apprelease)
+        script: |
+          set -e
+          # Собираем приложение. Профиль export_options.plist генерируется автоматически
+          flutter build ipa --release \
+            --flavor $FLAVOR \
+            --build-name=1.1.329 \
+            --build-number=329 \
+            --export-options-plist=$HOME/export_options.plist
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+
+    publishing:
+      app_store_connect:
+        auth: integration # Автоматически авторизуется через переменные из группы APPLE_CREDS
+        submit_to_testflight: true
+        beta_groups:
+          - SosediFedi-Инвесторы
