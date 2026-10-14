@@ -1,5 +1,5 @@
 # Конфигурация Codemagic для SosediFedi Partner
-# Flutter 3.47.1, флейвор apprelease, автоматическая подпись и публикация в Релиз App Store
+# Flutter 3.47.1, флейвор apprelease, автоматическая подпись и публикация в Релиз App Store [Полный файл codemagic.yaml]
 
 workflows:
   ios-appstore:
@@ -11,7 +11,7 @@ workflows:
       xcode: latest
       cocoapods: default
       groups:
-        - APPLE_CREDS # Группа секретов в панели Codemagic (Issuer ID, Key ID, .p8) [Шаг 1. Полный и правильный codemagic.yaml]
+        - APPLE_CREDS # Группа секретов в панели Codemagic (Issuer ID, Key ID, .p8) [Полный файл codemagic.yaml]
       vars:
         FLAVOR: apprelease
         BUNDLE_ID: com.lilcoffee.sell
@@ -19,10 +19,10 @@ workflows:
     scripts:
       - name: Set up iOS code signing
         script: |
-          # Автоматически генерируем сертификат и профиль распределения App Store [Шаг 1. Полный и правильный codemagic.yaml]
+          # Автоматически генерируем сертификат и профиль распределения App Store [Полный файл codemagic.yaml]
           app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
           
-          # Инициализируем связку ключей на виртуальном Mac [Шаг 1. Полный и правильный codemagic.yaml]
+          # Инициализируем связку ключей на виртуальном Mac [Полный файл codemagic.yaml]
           platform-utils keychain initialize
           platform-utils keychain add-certificates
 
@@ -38,25 +38,26 @@ workflows:
       - name: Build IPA (apprelease)
         script: |
           set -e
-          # Принудительно собираем флейвор и задаем точку входа. 
-          # Если для продакшена используется другой файл (например, lib/main_prod.dart), измените путь в --target.
+          # Флаг --no-authentication отключает повторную авторизацию во Flutter, 
+          # так как утилита fetch-signing-files уже скачала и установила все сертификаты.
           flutter build ipa --release \
             --flavor $FLAVOR \
             --target=lib/main.dart \
             --build-name=1.1.329 \
-            --build-number=329 \
-            --export-options-plist=$HOME/export_options.plist
+            --build-number=330 \
+            --export-options-plist=$HOME/export_options.plist \
+            --no-authentication
 
     artifacts:
       - build/ios/ipa/*.ipa
 
-    # НАСТРОЙКА АВТОМАТИЧЕСКОГО РЕЛИЗА В APP STORE [Шаг 1. Полный и правильный codemagic.yaml]
+    # НАСТРОЙКА АВТОМАТИЧЕСКОГО РЕЛИЗА В APP STORE [Полный файл codemagic.yaml]
     publishing:
       email:
         recipients:
-          - you@example.com # 👈 Укажите ваш email для уведомлений [Шаг 1. Полный и правильный codemagic.yaml]
+          - you@example.com # 👈 Укажите ваш email для уведомлений [Полный файл codemagic.yaml]
       app_store_connect:
         auth: integration
-        submit_to_testflight: false # Отключаем TestFlight [Шаг 1. Полный и правильный codemagic.yaml]
-        submit_to_app_store: true   # Включаем прямую отправку в App Store на модерацию [Шаг 1. Полный и правильный codemagic.yaml]
-        release_type: MANUAL        # MANUAL — вы сами опубликуете приложение кнопкой после аппрува Apple [Обновленный codemagic.yaml для публикации в релиз]
+        submit_to_testflight: false # Отключаем TestFlight [Полный файл codemagic.yaml]
+        submit_to_app_store: true   # Включаем прямую отправку в App Store на модерацию [Полный файл codemagic.yaml]
+        release_type: MANUAL        # MANUAL — вы сами опубликуете приложение кнопкой после аппрува Apple [Полный файл codemagic.yaml]
