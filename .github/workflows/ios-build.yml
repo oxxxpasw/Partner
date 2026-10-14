@@ -1,60 +1,87 @@
-# Codemagic configuration for SosediFedi Partner
-# Flutter 3.47.1, флейвор aprelease, автоматическая подпись и релиз в TestFlight
+name: iOS (apprelease) → TestFlight
 
-workflows:
+on:
+  push:
+    branches:
+      - main # Сборка будет запускаться при пуше в ветку main (измените, если нужно)
+  workflow_dispatch: # Позволяет запускать сборку вручную кнопкой на GitHub
+
+jobs:
   ios-appstore:
-    name: iOS (apprelease) → TestFlight
-    max_build_duration: 60
-    instance_type: mac_mini_m2
-    environment:
-      flutter: 3.47.1 # Жестко фиксируем версию Flutter, как указано в вашем ТЗ
-      xcode: latest
-      cocoapods: default
-      groups:
-        - APPLE_CREDS # Убедитесь, что в UI Codemagic создана группа с этим именем
-      vars:
-        FLAVOR: apprelease
-        BUNDLE_ID: com.lilcoffee.sell
-        
-    scripts:
-      - name: Set up iOS code signing
-        script: |
-          # 1. Автоматически запрашиваем и генерируем сертификаты/профили у Apple
-          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
-          
-          # 2. Инициализируем Keychain на виртуальном Mac для хранения этих сертификатов
-          platform-utils keychain initialize
-          platform-utils keychain add-certificates
+    name: Build & Release iOS
+    runs-on: macos-latest # Для сборки iOS нужна виртуальная машина macOS
 
+    steps:
+      # 1. Скачиваем код из вашего GitHub-репозитория
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Устанавливаем Java (требуется для инструментов сборки)
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      # 3. Устанавливаем конкретную версию Flutter из вашего ТЗ
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.1' # Точная версия из вашего ТЗ
+          channel: 'stable'
+          cache: true
+
+      # 4. Скачиваем зависимости Flutter
       - name: Get Flutter dependencies
-        script: |
-          flutter pub get
+        run: flutter pub get
 
+      # 5. Устанавливаем CocoaPods
       - name: CocoaPods install
-        script: |
+        run: |
           cd ios
           pod install --repo-update
 
+      # 6. Настраиваем авторизацию Apple API для автоматической подписи
+      - name: Set up iOS code signing certificates
+        env:
+          KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
+          ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+        run: |
+          # Создаем системную папку для ключа авторизации Xcode
+          mkdir -p ~/.appstoreconnect/private_keys
+          echo "$KEY_CONTENT" > ~/.appstoreconnect/private_keys/AuthKey_$KEY_ID.p8
+          
+          # Создаем временную защищенную связку ключей на Mac
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          KEYCHAIN_PASSWORD="temporary_password"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security default-keychain -s $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+      # 7. Компилируем проект в .ipa с авто-генерацией профилей подписи
       - name: Build IPA (apprelease)
-        script: |
-          set -e
-          # Генерируем exportOptions.plist автоматически в домашнюю директорию, 
-          # чтобы не тащить локальный файл из вашей папки D:\...
+        env:
+          XCODE_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
+          XCODE_API_KEY_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+        run: |
           flutter build ipa --release \
-            --flavor $FLAVOR \
+            --flavor apprelease \
             --build-name=1.1.329 \
             --build-number=329 \
-            --export-options-plist=$HOME/export_options.plist
+            --export-method app-store \
+            --allow-provisioning-updates
 
-    artifacts:
-      - build/ios/ipa/*.ipa
-
-    publishing:
-      email:
-        recipients:
-          - you@example.com # 👈 Укажите свой реальный e-mail для уведомлений
-      app_store_connect:
-        auth: integration # Использует системную интеграцию через переменные окружения
-        submit_to_testflight: true
-        beta_groups:
-          - SosediFedi-Инвесторы
+      # 8. Загружаем готовое приложение в TestFlight / App Store Connect
+      - name: Upload to App Store Connect
+        run: |
+          # Ищем скомпилированный файл .ipa в папке сборки
+          IPA_PATH=$(find build/ios/ipa -name "*.ipa" | head -n 1)
+          
+          # Отправляем файл напрямую в Apple через стандартную утилиту xcrun
+          xcrun altool --upload-app \
+            --type ios \
+            --file "$IPA_PATH" \
+            --apiKey "${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}" \
+            --apiIssuer "${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}"
