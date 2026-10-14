@@ -1,54 +1,75 @@
-name: Flutter iOS Build for AltStore
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  build:
-    runs-on: macos-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        channel: 'stable'
-        architecture: x64
-
-    - name: Get Flutter dependencies
-      run: flutter pub get
-
-    - name: Install CocoaPods Dependencies
-      run: |
-        cd ios
-        pod install --repo-update
-        cd ..
-
-    - name: Build Flutter iOS (No Sign)
-      run: |
-        flutter build ios --no-codesign --release
-
-    - name: Prepare APP folder for AltStore
-      run: |
-        mkdir -p Payload
-        
-        # Копируем приложение по точному пути, который показала диагностика
-        APP_PATH="/Users/runner/work/Partner/Partner/build/ios/iphoneos/Release.app"
-        
-        if [ ! -d "$APP_PATH" ]; then
-          echo "Ошибка: Приложение не найдено по пути $APP_PATH"
-          exit 1
-        fi
-        
-        echo "Успешно копируем приложение из: $APP_PATH"
-        cp -r "$APP_PATH" Payload/
-        zip -r Partner.ipa Payload
-
-    - name: Upload IPA Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: partner-ios-app
-        path: Partner.ipa
+# Codemagic.yaml — сборка iOS (только iOS) для SosediFedi Partner
+# Flutter 3.47.1, флейвор aprelease, подпись через App Store Connect API key,
+# публикация в TestFlight. Положи в корень репо (D:\coffelilactual\Partner\codemagic.yaml).
+ 
+workflows:
+  ios-appstore:
+    name: iOS (apprelease) → TestFlight
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable           # проект на 3.47.1; если хочешь прибить версию — укажи точную в Codemagic (Flutter versions) или git_ref
+      xcode: latest
+      cocoapods: default
+      groups:
+        # группа APPLE_CREDS в настроffikах (Settings → Groups) или прямо в vars:
+        - APPLE_CREDS
+      vars:
+        FLAVOR: apprelease          # aprelease (прод) | apptest (тест)
+        BUNDLE_ID: com.lilcoffee.sell
+        TEAM_ID: SKD9XFX3L6
+        # App Store Connect API key (ключ создан в ASC, Key ID у тебя: 3d30b5f7-...; .p8 cкачняется один раз в Codemagic App settings → App Store Connect API key)
+        # APP_STORE_CONNECT_ISSUER_ID и KEY_ID задавать в группах/UI, в yaml они через переменные ниже
+    scripts:
+      - name: Setup Flutter
+        script: |
+          flutter pub get
+      - name: CocoaPods install
+        script: |
+          cd ios
+          pod install --repo-update
+      - name: Build IPA (apprelease, app-store-connect)
+        script: |
+          set -e
+          flutter build ipa --release \
+            --flavor $FLAVOR \
+            --export-options-plist=scripts/ios/exportOptions_app-store-connect.plist \
+            --build-name=1.1.329 --build-number=329
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      email:
+        recipients:
+          - you@example.com   # заменить на свой e-mail
+      app_store_connect:
+        # в Codemagic App settings → "App Store Connect API key" добавь ключ
+        # (Issuer ID + .p8 + Key ID 3d30b5f7-67f1-4561-b74b-cf57b0124adc) и укажи его имя ниже.
+        api_key: APP_STORE_CONNECT_KEY
+        submit_to_testflight: true
+        beta_groups:
+          - SosediFedi-Инвесторы   # при желании группа TestFlight
+        # distribution: app-store  # раскомментировать, если сразу в App Store (надо upload + release)
+ 
+  ios-adhoc:
+    name: iOS (apprelease) ad-hoc / артефакт
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      vars:
+        FLAVOR: apprelease
+    scripts:
+      - name: Setup + deps
+        script: |
+          flutter pub get
+          cd ios && pod install --repo-update
+      - name: Build IPA (ad-hoc)
+        script: |
+          set -e
+          flutter build ipa --release --no-codesign \
+            --flavor $FLAVOR
+    artifacts:
+      - build/ios/ipa/*.ipa
+ 
