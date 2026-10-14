@@ -1,17 +1,17 @@
 # Конфигурация Codemagic для SosediFedi Partner
-# Flutter 3.47.1, флейвор apprelease, автоматическая подпись и релиз в TestFlight
+# Flutter 3.47.1, флейвор apprelease, автоматическая подпись и публикация в Релиз App Store
 
 workflows:
   ios-appstore:
-    name: iOS (apprelease) → TestFlight
+    name: iOS (apprelease) → App Store Release
     max_build_duration: 60
     instance_type: mac_mini_m2
     environment:
-      flutter: 3.47.1 # Фиксируем точную версию из вашего ТЗ
+      flutter: 3.47.1
       xcode: latest
       cocoapods: default
       groups:
-        - APPLE_CREDS # Сюда Codemagic подставит ключи App Store Connect
+        - APPLE_CREDS # Группа секретов в панели Codemagic (Issuer ID, Key ID, .p8)
       vars:
         FLAVOR: apprelease
         BUNDLE_ID: com.lilcoffee.sell
@@ -19,11 +19,10 @@ workflows:
     scripts:
       - name: Set up iOS code signing
         script: |
-          # Codemagic сам идет в Apple Developer Portal, генерирует сертификаты 
-          # и скачивает профили. Локальные файлы .p12 и .mobileprovision не нужны!
+          # Автоматически генерируем сертификат и профиль распределения App Store
           app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
           
-          # Настраиваем внутреннюю связку ключей на Mac
+          # Инициализируем связку ключей на виртуальном Mac
           platform-utils keychain initialize
           platform-utils keychain add-certificates
 
@@ -39,7 +38,7 @@ workflows:
       - name: Build IPA (apprelease)
         script: |
           set -e
-          # Собираем приложение. Профиль export_options.plist генерируется автоматически
+          # Собираем релизный .ipa
           flutter build ipa --release \
             --flavor $FLAVOR \
             --build-name=1.1.329 \
@@ -49,9 +48,18 @@ workflows:
     artifacts:
       - build/ios/ipa/*.ipa
 
+    # 👇 НАСТРОЙКА АВТОМАТИЧЕСКОГО РЕЛИЗА В APP STORE
     publishing:
+      email:
+        recipients:
+          - you@example.com # Укажите ваш email для уведомлений
       app_store_connect:
-        auth: integration # Автоматически авторизуется через переменные из группы APPLE_CREDS
-        submit_to_testflight: true
-        beta_groups:
-          - SosediFedi-Инвесторы
+        auth: integration
+        submit_to_testflight: false # 👈 Отключаем TestFlight
+        submit_to_app_store: true   # 👈 Включаем прямую отправку в App Store на модерацию
+        
+        # Выберите стратегию релиза после прохождения модерации (выберите ОДИН из вариантов ниже):
+        # MANUAL — вы сами зайдете и нажмете кнопку "Выпустить", когда Apple одобрит приложение
+        # AUTOMATIC — приложение опубликуется в магазине САМО сразу после одобрения
+        # SCHEDULED — публикация в заданное время
+        release_type: MANUAL 
