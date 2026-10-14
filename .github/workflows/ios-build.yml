@@ -3,8 +3,8 @@ name: iOS (apprelease) → TestFlight
 on:
   push:
     branches:
-      - main # Сборка будет запускаться при пуше в ветку main (измените, если нужно)
-  workflow_dispatch: # Позволяет запускать сборку вручную кнопкой на GitHub
+      - main # Сборка будет запускаться автоматически при пуше в ветку main
+  workflow_dispatch: # Позволяет запускать сборку вручную кнопкой во вкладке Actions на GitHub
 
 jobs:
   ios-appstore:
@@ -27,7 +27,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.47.1' # Точная версия из вашего ТЗ
+          flutter-version: '3.47.1'
           channel: 'stable'
           cache: true
 
@@ -60,7 +60,7 @@ jobs:
           security default-keychain -s $KEYCHAIN_PATH
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
-      # 7. Компилируем проект в .ipa с авто-генерацией профилей подписи
+      # 7. Компилируем проект в .ipa, передавая флаг авто-подписи напрямую в Xcode
       - name: Build IPA (apprelease)
         env:
           XCODE_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
@@ -71,7 +71,7 @@ jobs:
             --build-name=1.1.329 \
             --build-number=329 \
             --export-method app-store \
-            --allow-provisioning-updates
+            --xcconfig-flags="ALLOW_PROVISIONING_UPDATES=YES"
 
       # 8. Загружаем готовое приложение в TestFlight / App Store Connect
       - name: Upload to App Store Connect
