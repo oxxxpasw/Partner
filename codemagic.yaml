@@ -11,7 +11,7 @@ workflows:
       xcode: latest
       cocoapods: default
       groups:
-        - APPLE_CREDS # Ваша группа секретов (Issuer ID, Key ID, .p8 закрытый ключ)
+        - APPLE_CREDS # Группа секретов в панели Codemagic (Issuer ID, Key ID, .p8)
       vars:
         FLAVOR: apprelease
         BUNDLE_ID: com.lilcoffee.sell
@@ -19,10 +19,10 @@ workflows:
     scripts:
       - name: Set up iOS code signing
         script: |
-          # 1. Запрашиваем у Apple актуальные профили для App Store
+          # 1. Автоматически генерируем сертификат и профиль распределения App Store
           app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
           
-          # 2. Создаем и открываем Keychain, чтобы Xcode увидел сертификаты
+          # 2. Инициализируем связку ключей на виртуальном Mac
           platform-utils keychain initialize
           platform-utils keychain add-certificates
 
@@ -35,18 +35,20 @@ workflows:
           cd ios
           pod install --repo-update
 
-      - name: Build IPA (apprelease)
+      - name: Build iOS Archive and IPA
         script: |
           set -e
-          # Собираем проект. Флаг --no-authentication говорит Flutter не пытаться 
-          # авторизоваться в Apple заново, так как мы сделали это на первом шаге.
+          # 1. Флаг --no-authentication отключает повторную авторизацию во Flutter.
+          # 2. Переменная в --xcconfig-flags принудительно заставляет Xcode использовать 
+          # конфигурацию Release-apprelease вместо дефолтного сваливания в Debug.
           flutter build ipa --release \
             --flavor $FLAVOR \
             --target=lib/main.dart \
             --build-name=1.1.329 \
             --build-number=330 \
             --export-options-plist=$HOME/export_options.plist \
-            --no-authentication
+            --no-authentication \
+            --xcconfig-flags="BuildConfiguration=Release-apprelease"
 
     artifacts:
       - build/ios/ipa/*.ipa
@@ -55,9 +57,9 @@ workflows:
     publishing:
       email:
         recipients:
-          - you@example.com # 👈 Замените на ваш e-mail для отчетов о сборке
+          - you@example.com # 👈 Укажите ваш email для уведомлений
       app_store_connect:
         auth: integration
-        submit_to_testflight: false
-        submit_to_app_store: true   # Отправляем напрямую на модерацию в App Store
-        release_type: MANUAL        # Приложение выйдет в магазин только после вашего клика в панели Apple
+        submit_to_testflight: false 
+        submit_to_app_store: true   
+        release_type: MANUAL        
