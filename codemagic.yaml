@@ -1,5 +1,5 @@
 # Конфигурация Codemagic для SosediFedi Partner
-# Flutter 3.47.1, флейвор apprelease, автоматическая подпись и публикация в Релиз App Store [Полный файл codemagic.yaml]
+# Flutter 3.47.1, флейвор apprelease, автоматическая подпись и публикация в Релиз App Store
 
 workflows:
   ios-appstore:
@@ -11,7 +11,7 @@ workflows:
       xcode: latest
       cocoapods: default
       groups:
-        - APPLE_CREDS # Группа секретов в панели Codemagic (Issuer ID, Key ID, .p8) [Полный файл codemagic.yaml]
+        - APPLE_CREDS # Ваша группа секретов (Issuer ID, Key ID, .p8 закрытый ключ)
       vars:
         FLAVOR: apprelease
         BUNDLE_ID: com.lilcoffee.sell
@@ -19,10 +19,10 @@ workflows:
     scripts:
       - name: Set up iOS code signing
         script: |
-          # Автоматически генерируем сертификат и профиль распределения App Store [Полный файл codemagic.yaml]
+          # 1. Запрашиваем у Apple актуальные профили для App Store
           app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
           
-          # Инициализируем связку ключей на виртуальном Mac [Полный файл codemagic.yaml]
+          # 2. Создаем и открываем Keychain, чтобы Xcode увидел сертификаты
           platform-utils keychain initialize
           platform-utils keychain add-certificates
 
@@ -38,8 +38,8 @@ workflows:
       - name: Build IPA (apprelease)
         script: |
           set -e
-          # Флаг --no-authentication отключает повторную авторизацию во Flutter, 
-          # так как утилита fetch-signing-files уже скачала и установила все сертификаты.
+          # Собираем проект. Флаг --no-authentication говорит Flutter не пытаться 
+          # авторизоваться в Apple заново, так как мы сделали это на первом шаге.
           flutter build ipa --release \
             --flavor $FLAVOR \
             --target=lib/main.dart \
@@ -51,13 +51,13 @@ workflows:
     artifacts:
       - build/ios/ipa/*.ipa
 
-    # НАСТРОЙКА АВТОМАТИЧЕСКОГО РЕЛИЗА В APP STORE [Полный файл codemagic.yaml]
+    # НАСТРОЙКА АВТОМАТИЧЕСКОГО РЕЛИЗА В APP STORE
     publishing:
       email:
         recipients:
-          - you@example.com # 👈 Укажите ваш email для уведомлений [Полный файл codemagic.yaml]
+          - you@example.com # 👈 Замените на ваш e-mail для отчетов о сборке
       app_store_connect:
         auth: integration
-        submit_to_testflight: false # Отключаем TestFlight [Полный файл codemagic.yaml]
-        submit_to_app_store: true   # Включаем прямую отправку в App Store на модерацию [Полный файл codemagic.yaml]
-        release_type: MANUAL        # MANUAL — вы сами опубликуете приложение кнопкой после аппрува Apple [Полный файл codemagic.yaml]
+        submit_to_testflight: false
+        submit_to_app_store: true   # Отправляем напрямую на модерацию в App Store
+        release_type: MANUAL        # Приложение выйдет в магазин только после вашего клика в панели Apple
